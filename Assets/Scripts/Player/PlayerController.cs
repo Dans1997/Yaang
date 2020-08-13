@@ -8,7 +8,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float transitionTime = 2f;
 
     // State
-    bool isTrasitioning = false;
+    bool isIdle = true;
     Vector3 startPos;
 
     // Cached Components
@@ -19,7 +19,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         startPos = transform.position;
-        isTrasitioning = false;
+        isIdle = true;
 
         gameManager = GameManager.GameManagerInstance;
         playerAnimation = GetComponentInChildren<PlayerAnimation>();
@@ -28,7 +28,8 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (isTrasitioning) return;
+        playerAnimation.SetIdle(isIdle);
+        if (!isIdle) return;
 
         int deltaX = 0;
         int deltaY = 0;
@@ -51,6 +52,8 @@ public class PlayerController : MonoBehaviour
         }
         else return;
 
+        playerAnimation.SetMoveDirection(new Vector2(deltaX, deltaY));
+
         Vector3 destination = new Vector3(transform.position.x + deltaX, transform.position.y + deltaY, 0);
 
         StartCoroutine(LerpFromTo(transform.position, destination, transitionTime));
@@ -58,24 +61,22 @@ public class PlayerController : MonoBehaviour
 
     IEnumerator LerpFromTo(Vector3 pos1, Vector3 pos2, float duration)
     {
-        isTrasitioning = true;
-        playerAnimation.SetMove();
-
+        isIdle = false;
 
         for (float t = 0f; t < duration; t += Time.deltaTime)
         {
             transform.position = Vector3.Lerp(pos1, pos2, t / duration);
             yield return 0;
         }
-        isTrasitioning = false;
-
+        isIdle = true;
         transform.position = pos2;
+
+        // Check if the tile is valid or not
         CheckPlayerPosition();
     }
 
     private void CheckPlayerPosition()
     {
-        // Check if tile is valid or not
         if (gameManager.IsTileValid(transform.position))
         {
             if (gameManager.IsDestination(transform.position))
@@ -92,12 +93,10 @@ public class PlayerController : MonoBehaviour
     IEnumerator KillPlayer()
     {
         playerAnimation.SetDeath();
-        float length = playerAnimation.GetAnimationLength("Death");
-        Debug.Log(length);
-        yield return new WaitForSeconds(playerAnimation.GetAnimationLength("Death"));
+        yield return new WaitForSeconds(1f);
 
         playerAnimation.PlayAnimation("Idle");
         transform.position = startPos;
-        isTrasitioning = false;
+        isIdle = true;
     }
 }
