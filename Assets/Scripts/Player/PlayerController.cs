@@ -93,10 +93,8 @@ public class PlayerController : MonoBehaviour
     IEnumerator KillPlayer()
     {
         playerAnimation.SetDeath();
+        this.enabled = false;
         yield return new WaitForSeconds(1f);
-
-        playerAnimation.PlayAnimation("Idle");
-        transform.position = startPos;
-        isIdle = true;
+        SceneLoader.SceneLoaderInstance.ReloadScene();
     }
 }
