@@ -11,31 +11,18 @@ public class PlayerController : MonoBehaviour
     bool isTrasitioning = false;
     Vector3 startPos;
 
-    // To use own deltaTime;
-    float myDeltaTime = 0f;
-    float lastFrameTime = 0f;
-
     // Cached Components
     GameManager gameManager;
-
-    public void Restart()
-    {
-        Debug.Log("Player Restarting!");
-        transform.position = startPos;
-        isTrasitioning = false;
-        myDeltaTime = 0f;
-        lastFrameTime = 0f;
-    }
+    PlayerAnimation playerAnimation;
 
     // Start is called before the first frame update
     void Start()
     {
         startPos = transform.position;
         isTrasitioning = false;
-        myDeltaTime = 0f;
-        lastFrameTime = 0f;
 
         gameManager = GameManager.GameManagerInstance;
+        playerAnimation = GetComponentInChildren<PlayerAnimation>();
     }
 
     // Update is called once per frame
@@ -69,27 +56,27 @@ public class PlayerController : MonoBehaviour
         StartCoroutine(LerpFromTo(transform.position, destination, transitionTime));
     }
 
-    private void LateUpdate()
-    {
-        myDeltaTime = Time.realtimeSinceStartup - lastFrameTime;
-        lastFrameTime = Time.realtimeSinceStartup;
-    }
-
     IEnumerator LerpFromTo(Vector3 pos1, Vector3 pos2, float duration)
     {
         isTrasitioning = true;
-        Time.timeScale = 0f;
-        for (float t = 0f; t < duration; t += myDeltaTime)
+        playerAnimation.SetMove();
+
+
+        for (float t = 0f; t < duration; t += Time.deltaTime)
         {
             transform.position = Vector3.Lerp(pos1, pos2, t / duration);
             yield return 0;
         }
         isTrasitioning = false;
-        Time.timeScale = 1f;
-        transform.position = pos2;
 
+        transform.position = pos2;
+        CheckPlayerPosition();
+    }
+
+    private void CheckPlayerPosition()
+    {
         // Check if tile is valid or not
-        if(gameManager.IsTileValid(transform.position))
+        if (gameManager.IsTileValid(transform.position))
         {
             if (gameManager.IsDestination(transform.position))
             {
@@ -98,8 +85,19 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
-            // Kill Player
-            Restart();
+            StartCoroutine(KillPlayer());
         }
+    }
+
+    IEnumerator KillPlayer()
+    {
+        playerAnimation.SetDeath();
+        float length = playerAnimation.GetAnimationLength("Death");
+        Debug.Log(length);
+        yield return new WaitForSeconds(playerAnimation.GetAnimationLength("Death"));
+
+        playerAnimation.PlayAnimation("Idle");
+        transform.position = startPos;
+        isTrasitioning = false;
     }
 }
