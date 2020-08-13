@@ -9,15 +9,33 @@ public class PlayerController : MonoBehaviour
 
     // State
     bool isTrasitioning = false;
+    Vector3 startPos;
 
     // To use own deltaTime;
     float myDeltaTime = 0f;
     float lastFrameTime = 0f;
 
+    // Cached Components
+    GameManager gameManager;
+
+    public void Restart()
+    {
+        Debug.Log("Player Restarting!");
+        transform.position = startPos;
+        isTrasitioning = false;
+        myDeltaTime = 0f;
+        lastFrameTime = 0f;
+    }
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        startPos = transform.position;
+        isTrasitioning = false;
+        myDeltaTime = 0f;
+        lastFrameTime = 0f;
+
+        gameManager = GameManager.GameManagerInstance;
     }
 
     // Update is called once per frame
@@ -69,5 +87,19 @@ public class PlayerController : MonoBehaviour
         isTrasitioning = false;
         Time.timeScale = 1f;
         transform.position = pos2;
+
+        // Check if tile is valid or not
+        if(gameManager.IsTileValid(transform.position))
+        {
+            if (gameManager.IsDestination(transform.position))
+            {
+                Debug.Log("I'm ready for the next level");
+            }
+        }
+        else
+        {
+            // Kill Player
+            Restart();
+        }
     }
 }
