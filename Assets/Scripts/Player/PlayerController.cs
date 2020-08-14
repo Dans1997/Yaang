@@ -4,8 +4,13 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    [Header("Player Movement")]
     [SerializeField] int moveUnit = 2;
     [SerializeField] float transitionTime = 2f;
+
+    [Space]
+    [Header("Player Power")]
+    [SerializeField] bool hasUsedPower = false;
 
     // State
     bool isIdle = true;
@@ -14,6 +19,7 @@ public class PlayerController : MonoBehaviour
     // Cached Components
     GameManager gameManager;
     PlayerAnimation playerAnimation;
+    AudioManager audioManager;
 
     // Start is called before the first frame update
     void Start()
@@ -23,6 +29,7 @@ public class PlayerController : MonoBehaviour
 
         gameManager = GameManager.GameManagerInstance;
         playerAnimation = GetComponentInChildren<PlayerAnimation>();
+        audioManager = AudioManager.AudioManagerInstance;
     }
 
     // Update is called once per frame
@@ -31,6 +38,23 @@ public class PlayerController : MonoBehaviour
         playerAnimation.SetIdle(isIdle);
         if (!isIdle) return;
 
+        HandlePowerInput();
+        HandleMovementInput();
+    }
+
+    private void HandlePowerInput()
+    {
+        if (hasUsedPower) return;
+        if(Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
+        {
+            hasUsedPower = true;
+            // Implement lighting here
+            audioManager.PlaySound(AudioManager.SoundKey.PlayerPower);
+        }
+    }
+
+    private void HandleMovementInput()
+    {
         int deltaX = 0;
         int deltaY = 0;
 
@@ -53,6 +77,7 @@ public class PlayerController : MonoBehaviour
         else return;
 
         playerAnimation.SetMoveDirection(new Vector2(deltaX, deltaY));
+        audioManager.PlaySound(AudioManager.SoundKey.PlayerMove);
 
         Vector3 destination = new Vector3(transform.position.x + deltaX, transform.position.y + deltaY, 0);
 
@@ -82,6 +107,7 @@ public class PlayerController : MonoBehaviour
             if (gameManager.IsDestination(transform.position))
             {
                 Debug.Log("I'm ready for the next level");
+                SceneLoader.SceneLoaderInstance.LoadNextScene();
             }
         }
         else
@@ -92,9 +118,12 @@ public class PlayerController : MonoBehaviour
 
     IEnumerator KillPlayer()
     {
+        audioManager.PlaySound(AudioManager.SoundKey.PlayerDeath);
         playerAnimation.SetDeath();
         this.enabled = false;
         yield return new WaitForSeconds(1f);
+        audioManager.PlaySound(AudioManager.SoundKey.PlayerGroundHit);
+        yield return new WaitForSeconds(0.5f);
         SceneLoader.SceneLoaderInstance.ReloadScene();
     }
 }
