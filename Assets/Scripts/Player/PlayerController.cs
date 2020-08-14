@@ -20,6 +20,7 @@ public class PlayerController : MonoBehaviour
     GameManager gameManager;
     PlayerAnimation playerAnimation;
     AudioManager audioManager;
+    CameraShake cameraShake;
 
     // Start is called before the first frame update
     void Start()
@@ -30,6 +31,7 @@ public class PlayerController : MonoBehaviour
         gameManager = GameManager.GameManagerInstance;
         playerAnimation = GetComponentInChildren<PlayerAnimation>();
         audioManager = AudioManager.AudioManagerInstance;
+        cameraShake = FindObjectOfType<CameraShake>();
     }
 
     // Update is called once per frame
@@ -122,6 +124,7 @@ public class PlayerController : MonoBehaviour
         playerAnimation.SetDeath();
         this.enabled = false;
         yield return new WaitForSeconds(1f);
+        StartCoroutine(cameraShake.ShakeCamera(.25f, 1f));
         audioManager.PlaySound(AudioManager.SoundKey.PlayerGroundHit);
         yield return new WaitForSeconds(0.5f);
         SceneLoader.SceneLoaderInstance.ReloadScene();
