@@ -21,6 +21,7 @@ public class PlayerController : MonoBehaviour
     PlayerAnimation playerAnimation;
     AudioManager audioManager;
     CameraShake cameraShake;
+    Animator playerPower;
 
     // Start is called before the first frame update
     void Start()
@@ -32,6 +33,7 @@ public class PlayerController : MonoBehaviour
         playerAnimation = GetComponentInChildren<PlayerAnimation>();
         audioManager = AudioManager.AudioManagerInstance;
         cameraShake = FindObjectOfType<CameraShake>();
+        playerPower = GameObject.FindGameObjectWithTag("PlayerPower").GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -50,7 +52,7 @@ public class PlayerController : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
         {
             hasUsedPower = true;
-            // Implement lighting here
+            playerPower.SetTrigger("activateTrigger");
             audioManager.PlaySound(AudioManager.SoundKey.PlayerPower);
         }
     }
