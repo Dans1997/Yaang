@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -21,37 +22,79 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private void Awake()
-    {
-        _instance = this;
-    }
-
     #endregion Singleton
 
-    // State
-    Vector3 destination;
-    TilePath[] tiles;
-
-    // Start is called before the first frame update
-    void Start()
+    [System.Serializable]
+    public class Level
     {
-        destination = GameObject.FindGameObjectWithTag("Finish").transform.position;
-        tiles = FindObjectsOfType<TilePath>();
+        public int levelId = 0; //buildIndex
+        public int timesCompleted = 0;
+        public int timesFailed = 0;
+
+        public bool isFirstVisit = true;
     }
 
-    public bool IsTileValid(Vector3 position)
+    // Reference to all the scenes
+    [SerializeField] List<Level> levels = new List<Level>();
+
+    private void Awake()
     {
-        foreach (TilePath tile in tiles)
+        if(_instance == null)
         {
-            if (tile.transform.position == position)
-                return true;
+            _instance = this;
+            DontDestroyOnLoad(gameObject);
         }
-        return false;
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 
-    public bool IsDestination(Vector3 position)
+    private void Start()
     {
-        return position == destination;
+        for (int i = 0; i < SceneManager.sceneCountInBuildSettings; i++)
+        {
+            Level newLevel = new Level();
+            newLevel.levelId = i;
+            levels.Add(newLevel);
+        }
     }
 
+    public bool IsFirstVisit(int id)
+    {
+        Level levelMatch = levels.Find(l => l.levelId == id);
+        if (levelMatch != null) return levelMatch.isFirstVisit;
+        else
+        {
+            Debug.LogWarning("Scene with id " + id + " not found!");
+            return false;
+        }
+    }
+
+    public void SetFirstVisit(int id, bool firstVisit)
+    {
+        Level levelMatch = levels.Find(l => l.levelId == id);
+        if (levelMatch != null) levelMatch.isFirstVisit = firstVisit;
+        else
+        {
+            Debug.LogWarning("Scene with id " + id + " not found!");
+            return;
+        }
+    }
+
+    public void CompleteLevel()
+    {
+        int id = SceneManager.GetActiveScene().buildIndex;
+        Level levelMatch = levels.Find(l => l.levelId == id);
+        if (levelMatch != null)
+        {
+            levelMatch.timesCompleted++;
+            SceneLoader.SceneLoaderInstance.LoadNextScene();
+        }
+        else
+        {
+            Debug.LogWarning("Scene with id " + id + " not found!");
+            return;
+        }
+    }
 }

@@ -57,6 +57,7 @@ public class SceneLoader : MonoBehaviour
     IEnumerator LoadScene(int buildIndex)
     {
         transitionAnimator.SetTrigger("loadLevel");
+        AudioManager.AudioManagerInstance.PlaySound(AudioManager.SoundKey.Transition);
         yield return new WaitForSeconds(1f);
         SceneManager.LoadScene(buildIndex);
     }

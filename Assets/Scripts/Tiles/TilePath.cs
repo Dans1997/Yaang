@@ -4,17 +4,18 @@ using UnityEngine;
 
 public class TilePath : MonoBehaviour
 {
-    //TODO: Make this light up at the start
 
-    // Start is called before the first frame update
-    void Start()
+    public void LightUp()
     {
-        
+        //Debug.Log("LIGHT IT UP! " + gameObject.name);
+        // Set light animation here
+        int randomSound = Random.Range((int) AudioManager.SoundKey.TileLightUp1, (int) AudioManager.SoundKey.TileLightUp4);
+        AudioManager.AudioManagerInstance.PlaySound((AudioManager.SoundKey) randomSound);
     }
 
-    // Update is called once per frame
-    void Update()
+    public void TurnOff()
     {
-        
+        //Debug.Log("LIGHT IT DOWN! " + gameObject.name);
+        // Set Turn Off Animation here
     }
 }

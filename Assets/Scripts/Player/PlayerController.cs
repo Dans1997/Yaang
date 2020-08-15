@@ -17,7 +17,7 @@ public class PlayerController : MonoBehaviour
     Vector3 startPos;
 
     // Cached Components
-    GameManager gameManager;
+    PathManager pathManager;
     PlayerAnimation playerAnimation;
     AudioManager audioManager;
     CameraShake cameraShake;
@@ -29,7 +29,7 @@ public class PlayerController : MonoBehaviour
         startPos = transform.position;
         isIdle = true;
 
-        gameManager = GameManager.GameManagerInstance;
+        pathManager = PathManager.PathManagerInstance;
         playerAnimation = GetComponentInChildren<PlayerAnimation>();
         audioManager = AudioManager.AudioManagerInstance;
         cameraShake = FindObjectOfType<CameraShake>();
@@ -83,7 +83,7 @@ public class PlayerController : MonoBehaviour
         playerAnimation.SetMoveDirection(new Vector2(deltaX, deltaY));
         audioManager.PlaySound(AudioManager.SoundKey.PlayerMove);
 
-        Vector3 destination = new Vector3(transform.position.x + deltaX, transform.position.y + deltaY, 0);
+        Vector3 destination = new Vector3(transform.position.x + deltaX, transform.position.y + deltaY, transform.position.z);
 
         StartCoroutine(LerpFromTo(transform.position, destination, transitionTime));
     }
@@ -106,12 +106,13 @@ public class PlayerController : MonoBehaviour
 
     private void CheckPlayerPosition()
     {
-        if (gameManager.IsTileValid(transform.position))
+        if (pathManager.IsTileValid(transform.position))
         {
-            if (gameManager.IsDestination(transform.position))
+            if (pathManager.IsDestination(transform.position))
             {
                 Debug.Log("I'm ready for the next level");
-                SceneLoader.SceneLoaderInstance.LoadNextScene();
+                this.enabled = false;
+                GameManager.GameManagerInstance.CompleteLevel();
             }
         }
         else
@@ -126,9 +127,11 @@ public class PlayerController : MonoBehaviour
         playerAnimation.SetDeath();
         this.enabled = false;
         yield return new WaitForSeconds(1f);
+
         StartCoroutine(cameraShake.ShakeCamera(.25f, 1f));
         audioManager.PlaySound(AudioManager.SoundKey.PlayerGroundHit);
         yield return new WaitForSeconds(0.5f);
+
         SceneLoader.SceneLoaderInstance.ReloadScene();
     }
 }

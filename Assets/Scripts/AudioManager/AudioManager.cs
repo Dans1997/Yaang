@@ -15,7 +15,7 @@ public class AudioManager : MonoBehaviour
         {
             if (_instance == null)
             {
-                Debug.LogError("UI Manager is null!");
+                Debug.LogError("Audio Manager is null!");
             }
 
             return _instance;
@@ -30,7 +30,15 @@ public class AudioManager : MonoBehaviour
         PlayerPower,
         PlayerDeath,
         PlayerGroundHit,
-        MainTheme
+
+        MainTheme,
+        Transition,
+        Button,
+
+        TileLightUp1,
+        TileLightUp2,
+        TileLightUp3,
+        TileLightUp4
     }
 
     [System.Serializable]
@@ -74,6 +82,8 @@ public class AudioManager : MonoBehaviour
 
         // Main Theme
         PlaySound(SoundKey.MainTheme, transform.position);
+        // Transition Sound
+        PlaySound(SoundKey.Transition);
     }
 
     private void SetUpSounds()
@@ -86,6 +96,8 @@ public class AudioManager : MonoBehaviour
             }
         }
     }
+
+    public void PlaySelectButton() => PlaySound(SoundKey.Button);
 
     // Ignores Looping and SpatialBlend
     public void PlaySound(SoundKey soundKey)
