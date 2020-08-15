@@ -29,14 +29,21 @@ public class PathManager : MonoBehaviour
 
     #endregion Singleton
 
+    public class Tile
+    {
+        bool isVisited = false;
+        // Todo: Maybe add colors here?
+    }
+
     [SerializeField] float lightTileTime;
     [Space]
     [SerializeField] TilePath[] path;
 
-
     // State
     Vector3 start;
     Vector3 finish;
+
+    // Cached Components
     PlayerController player;
     CameraFollow cameraFollow;
     AudioManager audioManager;
@@ -64,6 +71,7 @@ public class PathManager : MonoBehaviour
             cameraFollow.transform.position = new Vector3(start.x, start.y, cameraFollow.transform.position.z);
             cameraFollow.SetFollowObject(player.gameObject);
             path[0].LightUp(); // Ligth Up First Tile
+            path[0].SetVisit(true);
         }
     }
 
@@ -72,7 +80,6 @@ public class PathManager : MonoBehaviour
         player.enabled = false;
         yield return new WaitForSeconds(0.7f); // 70% of Transition Duration
 
-        Vector3 playerDestination = new Vector3(start.x, start.y -1, start.z); // 1 unit before first tile
         Camera mainCamera = cameraFollow.GetComponent<Camera>();
         Transform playerPos = player.transform;
 
@@ -82,15 +89,18 @@ public class PathManager : MonoBehaviour
         // Move Player to 1 unit before first tile path
         for (float t = 0f; t < 3f; t += Time.deltaTime)
         {
-            playerPos.position = Vector3.MoveTowards(playerPos.position, playerDestination, Time.deltaTime * 2);
-            if (playerPos.position == playerDestination) break;
+            playerPos.position = Vector3.MoveTowards(playerPos.position, start, Time.deltaTime * 2);
+            if (playerPos.position == start) break;
             audioManager.PlaySound(AudioManager.SoundKey.Footstep);
             yield return 0;
         }
-        playerPos.position = playerDestination;
+        playerPos.position = start;
+
+        IsTileValid(player.transform.position);
+        yield return new WaitForSeconds(0.7f); // 70% of Tile Light Up Animation Duration
 
         // Zoom camera in
-        while(mainCamera.orthographicSize > previousOrthoSize)
+        while (mainCamera.orthographicSize > previousOrthoSize)
         {
             mainCamera.orthographicSize -= Time.deltaTime * 2;
             yield return 0;
@@ -103,7 +113,7 @@ public class PathManager : MonoBehaviour
             StartCoroutine(cameraFollow.LerpFromTo(cameraFollow.transform.position, tile.transform.position, lightTileTime));
             yield return new WaitUntil(() => new Vector2(cameraFollow.transform.position.x, cameraFollow.transform.position.y) == new Vector2(tile.transform.position.x, tile.transform.position.y));
             tile.LightUp();
-            yield return new WaitForSeconds(1f); // Tile Light Up Animation Duration
+            yield return new WaitForSeconds(0.7f); // 70% of Tile Light Up Animation Duration
         }
 
         gameObject.BroadcastMessage("TurnOff");
@@ -115,7 +125,6 @@ public class PathManager : MonoBehaviour
 
         cameraFollow.SetFollowObject(player.gameObject);
         player.enabled = true;
-        IsTileValid(player.transform.position);
     }
 
     public bool IsTileValid(Vector3 position)
@@ -124,6 +133,7 @@ public class PathManager : MonoBehaviour
         if(tile != null)
         {
             tile.LightUp();
+            tile.SetVisit(true);
             return true;
         }
         else
