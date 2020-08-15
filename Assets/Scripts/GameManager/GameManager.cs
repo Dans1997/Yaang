@@ -92,12 +92,21 @@ public class GameManager : MonoBehaviour
         if (levels[id] != null)
         {
             levels[id].timesCompleted++;
-            SceneLoader.SceneLoaderInstance.LoadNextScene();
+            StartCoroutine(CompletionCutscene());
         }
         else
         {
             Debug.LogWarning("Scene with id " + id + " not found!");
             return;
         }
+    }
+
+    IEnumerator CompletionCutscene()
+    {
+        // Zoom camera out?
+        // Move player to door?
+        // Queue transition?
+        yield return new WaitForSeconds(0);
+        SceneLoader.SceneLoaderInstance.LoadNextScene();
     }
 }

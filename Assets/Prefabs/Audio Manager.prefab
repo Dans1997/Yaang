@@ -132,3 +132,11 @@ MonoBehaviour:
     pitch: 1
     spatialBlend: 0
     loop: 0
+  - audioSource: {fileID: 0}
+    soundKey: 11
+    clip: {fileID: 8300000, guid: 032d71653bdcac74bba3d1e1b2a1db2e, type: 3}
+    delay: 0
+    volume: 0.7
+    pitch: 1
+    spatialBlend: 0
+    loop: 0

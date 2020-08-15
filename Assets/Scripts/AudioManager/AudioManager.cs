@@ -38,7 +38,9 @@ public class AudioManager : MonoBehaviour
         TileLightUp1,
         TileLightUp2,
         TileLightUp3,
-        TileLightUp4
+        TileLightUp4,
+
+        TileLightDown1
     }
 
     [System.Serializable]

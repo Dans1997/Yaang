@@ -74,17 +74,29 @@ public class PathManager : MonoBehaviour
         }
 
         gameObject.BroadcastMessage("TurnOff");
+        AudioManager.AudioManagerInstance.PlaySound(AudioManager.SoundKey.TileLightDown1);
+        yield return new WaitForSeconds(1.3f);
+
         StartCoroutine(cameraFollow.LerpFromTo(cameraFollow.transform.position, player.transform.position, lightTileTime));
         yield return new WaitUntil(() => new Vector2(cameraFollow.transform.position.x, cameraFollow.transform.position.y) == new Vector2(player.transform.position.x, player.transform.position.y));
 
-        player.enabled = true;
         cameraFollow.SetFollowObject(player.gameObject);
+        player.enabled = true;
+        IsTileValid(player.transform.position);
     }
 
     public bool IsTileValid(Vector3 position)
     {
         TilePath tile = System.Array.Find(path, t => t.transform.position == position);
-        return tile != null;
+        if(tile != null)
+        {
+            tile.LightUp();
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 
     public bool IsDestination(Vector3 position) => new Vector2(position.x, position.y) == new Vector2(destination.x, destination.y);
