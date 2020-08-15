@@ -33,6 +33,7 @@ public class PathManager : MonoBehaviour
     [Space]
     [SerializeField] TilePath[] path;
 
+
     // State
     Vector3 start;
     Vector3 finish;
@@ -59,7 +60,10 @@ public class PathManager : MonoBehaviour
         }
         else
         {
+            player.transform.position = new Vector3(start.x, start.y, player.transform.position.z);
+            cameraFollow.transform.position = new Vector3(start.x, start.y, cameraFollow.transform.position.z);
             cameraFollow.SetFollowObject(player.gameObject);
+            path[0].LightUp(); // Ligth Up First Tile
         }
     }
 
