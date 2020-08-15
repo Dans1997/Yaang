@@ -62,22 +62,26 @@ public class GameManager : MonoBehaviour
 
     public bool IsFirstVisit(int id)
     {
-        Level levelMatch = levels.Find(l => l.levelId == id);
-        if (levelMatch != null) return levelMatch.isFirstVisit;
+        if(levels[id] != null)
+        {
+            return levels[id].isFirstVisit;
+        }
         else
         {
-            Debug.LogWarning("Scene with id " + id + " not found!");
+            Debug.LogWarning("Id " + id + " is not a valid level index!");
             return false;
         }
     }
 
     public void SetFirstVisit(int id, bool firstVisit)
     {
-        Level levelMatch = levels.Find(l => l.levelId == id);
-        if (levelMatch != null) levelMatch.isFirstVisit = firstVisit;
+        if (levels[id] != null)
+        {
+            levels[id].isFirstVisit = firstVisit;
+        }
         else
         {
-            Debug.LogWarning("Scene with id " + id + " not found!");
+            Debug.LogWarning("Id " + id + " is not a valid level index!");
             return;
         }
     }
@@ -85,10 +89,9 @@ public class GameManager : MonoBehaviour
     public void CompleteLevel()
     {
         int id = SceneManager.GetActiveScene().buildIndex;
-        Level levelMatch = levels.Find(l => l.levelId == id);
-        if (levelMatch != null)
+        if (levels[id] != null)
         {
-            levelMatch.timesCompleted++;
+            levels[id].timesCompleted++;
             SceneLoader.SceneLoaderInstance.LoadNextScene();
         }
         else
