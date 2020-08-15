@@ -34,14 +34,16 @@ public class PathManager : MonoBehaviour
     [SerializeField] TilePath[] path;
 
     // State
-    Vector3 destination;
+    Vector3 start;
+    Vector3 finish;
     PlayerController player;
     CameraFollow cameraFollow;
 
     // Start is called before the first frame update
     void Start()
     {
-        destination = GameObject.FindGameObjectWithTag("Finish").transform.position;
+        start = GameObject.FindGameObjectWithTag("Start").transform.position;
+        finish = GameObject.FindGameObjectWithTag("Finish").transform.position;
         player = FindObjectOfType<PlayerController>();
         cameraFollow = FindObjectOfType<CameraFollow>();
 
@@ -99,6 +101,6 @@ public class PathManager : MonoBehaviour
         }
     }
 
-    public bool IsDestination(Vector3 position) => new Vector2(position.x, position.y) == new Vector2(destination.x, destination.y);
+    public bool IsDestination(Vector3 position) => new Vector2(position.x, position.y) == new Vector2(finish.x, finish.y);
 
 }

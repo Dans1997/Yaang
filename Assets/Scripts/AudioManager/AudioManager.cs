@@ -40,7 +40,9 @@ public class AudioManager : MonoBehaviour
         TileLightUp3,
         TileLightUp4,
 
-        TileLightDown1
+        TileLightDown1,
+
+        Footstep,
     }
 
     [System.Serializable]

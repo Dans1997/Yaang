@@ -24,7 +24,6 @@ public class GameManager : MonoBehaviour
 
     #endregion Singleton
 
-    [System.Serializable]
     public class Level
     {
         public int levelId = 0; //buildIndex
@@ -35,7 +34,7 @@ public class GameManager : MonoBehaviour
     }
 
     // Reference to all the scenes
-    [SerializeField] List<Level> levels = new List<Level>();
+    List<Level> levels = new List<Level>();
 
     private void Awake()
     {
@@ -103,7 +102,18 @@ public class GameManager : MonoBehaviour
 
     IEnumerator CompletionCutscene()
     {
-        // Zoom camera out?
+        Camera camera = Camera.main;
+        Transform playerPos = FindObjectOfType<PlayerController>().transform;
+        AudioManager audioManager = AudioManager.AudioManagerInstance;
+
+        for (float t = 0f; t < 1f; t += Time.deltaTime)
+        {
+            camera.orthographicSize += Time.deltaTime * 3;
+            playerPos.position = new Vector3(playerPos.position.x, playerPos.position.y + Time.deltaTime * 3, playerPos.position.z);
+            audioManager.PlaySound(AudioManager.SoundKey.Footstep);
+            yield return 0;
+        }
+
         // Move player to door?
         // Queue transition?
         yield return new WaitForSeconds(0);
