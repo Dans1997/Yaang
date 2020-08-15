@@ -38,6 +38,7 @@ public class PathManager : MonoBehaviour
     Vector3 finish;
     PlayerController player;
     CameraFollow cameraFollow;
+    AudioManager audioManager;
 
     // Start is called before the first frame update
     void Start()
@@ -46,6 +47,7 @@ public class PathManager : MonoBehaviour
         finish = GameObject.FindGameObjectWithTag("Finish").transform.position;
         player = FindObjectOfType<PlayerController>();
         cameraFollow = FindObjectOfType<CameraFollow>();
+        audioManager = AudioManager.AudioManagerInstance;
 
         GameManager gameManager = GameManager.GameManagerInstance;
         int currentBuildIndex = SceneManager.GetActiveScene().buildIndex;
@@ -64,9 +66,34 @@ public class PathManager : MonoBehaviour
     IEnumerator StartLevel()
     {
         player.enabled = false;
-        yield return new WaitForSeconds(1f); // Transition Duration
+        yield return new WaitForSeconds(0.7f); // 70% of Transition Duration
 
+        Vector3 playerDestination = new Vector3(start.x, start.y -1, start.z); // 1 unit before first tile
+        Camera mainCamera = cameraFollow.GetComponent<Camera>();
+        Transform playerPos = player.transform;
 
+        float previousOrthoSize = mainCamera.orthographicSize;
+        mainCamera.orthographicSize = 4f;
+
+        // Move Player to 1 unit before first tile path
+        for (float t = 0f; t < 3f; t += Time.deltaTime)
+        {
+            playerPos.position = Vector3.MoveTowards(playerPos.position, playerDestination, Time.deltaTime * 2);
+            if (playerPos.position == playerDestination) break;
+            audioManager.PlaySound(AudioManager.SoundKey.Footstep);
+            yield return 0;
+        }
+        playerPos.position = playerDestination;
+
+        // Zoom camera in
+        while(mainCamera.orthographicSize > previousOrthoSize)
+        {
+            mainCamera.orthographicSize -= Time.deltaTime * 2;
+            yield return 0;
+        }
+        mainCamera.orthographicSize = previousOrthoSize;
+
+        // Light Up All Tile Paths
         foreach (TilePath tile in path)
         {
             StartCoroutine(cameraFollow.LerpFromTo(cameraFollow.transform.position, tile.transform.position, lightTileTime));
@@ -76,7 +103,7 @@ public class PathManager : MonoBehaviour
         }
 
         gameObject.BroadcastMessage("TurnOff");
-        AudioManager.AudioManagerInstance.PlaySound(AudioManager.SoundKey.TileLightDown1);
+        audioManager.PlaySound(AudioManager.SoundKey.TileLightDown1);
         yield return new WaitForSeconds(1.3f);
 
         StartCoroutine(cameraFollow.LerpFromTo(cameraFollow.transform.position, player.transform.position, lightTileTime));

@@ -36,6 +36,11 @@ public class GameManager : MonoBehaviour
     // Reference to all the scenes
     List<Level> levels = new List<Level>();
 
+    // Cached Components 
+    Camera mainCamera;
+    Transform playerPos;
+    AudioManager audioManager;
+
     private void Awake()
     {
         if(_instance == null)
@@ -57,6 +62,10 @@ public class GameManager : MonoBehaviour
             newLevel.levelId = i;
             levels.Add(newLevel);
         }
+
+        mainCamera = Camera.main;
+        playerPos = FindObjectOfType<PlayerController>().transform;
+        audioManager = AudioManager.AudioManagerInstance;
     }
 
     public bool IsFirstVisit(int id)
@@ -102,13 +111,10 @@ public class GameManager : MonoBehaviour
 
     IEnumerator CompletionCutscene()
     {
-        Camera camera = Camera.main;
-        Transform playerPos = FindObjectOfType<PlayerController>().transform;
-        AudioManager audioManager = AudioManager.AudioManagerInstance;
 
         for (float t = 0f; t < 1f; t += Time.deltaTime)
         {
-            camera.orthographicSize += Time.deltaTime * 3;
+            mainCamera.orthographicSize += Time.deltaTime * 3;
             playerPos.position = new Vector3(playerPos.position.x, playerPos.position.y + Time.deltaTime * 3, playerPos.position.z);
             audioManager.PlaySound(AudioManager.SoundKey.Footstep);
             yield return 0;
