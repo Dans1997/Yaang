@@ -14,6 +14,9 @@ public class PlayerAnimation : MonoBehaviour
     {
         playerAnimator = GameObject.Find("Player Sprite").GetComponent<Animator>();
         clips = playerAnimator.runtimeAnimatorController.animationClips;
+
+        // Start With The Player Looking Up
+        SetIdle(true);
     }
 
     public void PlayAnimation(string name) => playerAnimator.Play(name, -1, 0f);
