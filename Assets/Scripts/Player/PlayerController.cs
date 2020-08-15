@@ -110,7 +110,6 @@ public class PlayerController : MonoBehaviour
         {
             if (pathManager.IsDestination(transform.position))
             {
-                Debug.Log("I'm ready for the next level");
                 this.enabled = false;
                 GameManager.GameManagerInstance.CompleteLevel();
             }

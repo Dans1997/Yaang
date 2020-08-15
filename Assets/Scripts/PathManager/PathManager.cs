@@ -87,9 +87,6 @@ public class PathManager : MonoBehaviour
         return tile != null;
     }
 
-    public bool IsDestination(Vector3 position)
-    {
-        return position == destination;
-    }
+    public bool IsDestination(Vector3 position) => new Vector2(position.x, position.y) == new Vector2(destination.x, destination.y);
 
 }
