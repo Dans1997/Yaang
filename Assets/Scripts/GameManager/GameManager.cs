@@ -125,4 +125,19 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(0);
         SceneLoader.SceneLoaderInstance.LoadNextScene();
     }
+
+    public void FailLevel()
+    {
+        int id = SceneManager.GetActiveScene().buildIndex;
+        if (levels[id] != null)
+        {
+            levels[id].timesFailed++;
+            SceneLoader.SceneLoaderInstance.ReloadScene();
+        }
+        else
+        {
+            Debug.LogWarning("Scene with id " + id + " not found!");
+            return;
+        }
+    }
 }

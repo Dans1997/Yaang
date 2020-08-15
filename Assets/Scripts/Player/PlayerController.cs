@@ -131,6 +131,6 @@ public class PlayerController : MonoBehaviour
         audioManager.PlaySound(AudioManager.SoundKey.PlayerGroundHit);
         yield return new WaitForSeconds(0.5f);
 
-        SceneLoader.SceneLoaderInstance.ReloadScene();
+        GameManager.GameManagerInstance.FailLevel();
     }
 }
