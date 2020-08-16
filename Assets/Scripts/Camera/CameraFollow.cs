@@ -5,7 +5,7 @@ using UnityEngine;
 public class CameraFollow : MonoBehaviour
 {
     [SerializeField] Vector2 followOffset;
-    [SerializeField] float moveSpeed = 2.5f;
+    [SerializeField] float moveSpeed = 3f;
     [SerializeField] float cameraOrthoSize = 4.5f;
 
     [Header("Camera Bounds")]
@@ -23,6 +23,7 @@ public class CameraFollow : MonoBehaviour
     }
 
     public void SetFollowObject(GameObject newfollowObject) => followObject = newfollowObject;
+    public void SetMoveSpeed(float newSpeed) => moveSpeed = newSpeed;
 
     void FixedUpdate()
     {

@@ -446,7 +446,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   followOffset: {x: 5, y: 3}
-  moveSpeed: 2.5
+  moveSpeed: 3
   cameraOrthoSize: 2.5
   minXPos: -3
   maxXPos: 3

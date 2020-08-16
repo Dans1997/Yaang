@@ -88,9 +88,6 @@ public class PathManager : MonoBehaviour
         Transform playerPos = player.transform;
         PlayerAnimation playerAnimation = player.GetComponentInChildren<PlayerAnimation>();
 
-        float previousOrthoSize = mainCamera.orthographicSize;
-        mainCamera.orthographicSize = 4f;
-
         // Move Player to First Tile Path
         playerAnimation.PlayAnimation("Move_Up_Loop");
         for (float t = 0f; t < 3f; t += Time.deltaTime)
@@ -105,14 +102,6 @@ public class PathManager : MonoBehaviour
 
         IsTileValid(player.transform.position);
         yield return new WaitForSeconds(0.7f); // 70% of Tile Light Up Animation Duration
-
-        // Zoom camera in
-        while (mainCamera.orthographicSize > previousOrthoSize)
-        {
-            mainCamera.orthographicSize -= Time.deltaTime * 2;
-            yield return 0;
-        }
-        mainCamera.orthographicSize = previousOrthoSize;
 
         // Light Up All Tile Paths
         foreach (TilePath tile in path)
@@ -134,10 +123,11 @@ public class PathManager : MonoBehaviour
         yield return new WaitForSeconds(2f); // Time to show Exit Door
 
         // Go to Player Position
-        StartCoroutine(cameraFollow.LerpFromTo(cameraFollow.transform.position, player.transform.position, 3f));
+        cameraFollow.SetFollowObject(player.gameObject);
+        cameraFollow.SetMoveSpeed(8f);
         yield return new WaitUntil(() => new Vector2(cameraFollow.transform.position.x, cameraFollow.transform.position.y) == new Vector2(player.transform.position.x, player.transform.position.y));
 
-        cameraFollow.SetFollowObject(player.gameObject);
+        cameraFollow.SetMoveSpeed(3f);
         player.enabled = true;
     }
 

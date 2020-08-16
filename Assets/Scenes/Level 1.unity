@@ -342,8 +342,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22ff8122ffd9f02469d38033ac94cb3e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  followOffset: {x: 5, y: 3}
-  moveSpeed: 2.5
+  followOffset: {x: 5.5, y: 2}
+  moveSpeed: 5
   cameraOrthoSize: 2.5
   minXPos: -3
   maxXPos: 3
