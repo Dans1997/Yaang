@@ -125,7 +125,7 @@ public class PathManager : MonoBehaviour
         // Go to Player Position
         cameraFollow.SetFollowObject(player.gameObject);
         cameraFollow.SetMoveSpeed(8f);
-        yield return new WaitUntil(() => new Vector2(cameraFollow.transform.position.x, cameraFollow.transform.position.y) == new Vector2(player.transform.position.x, player.transform.position.y));
+        yield return new WaitForSeconds(3f);
 
         cameraFollow.SetMoveSpeed(3f);
         player.enabled = true;
