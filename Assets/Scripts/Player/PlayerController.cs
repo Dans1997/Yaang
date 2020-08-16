@@ -112,6 +112,8 @@ public class PlayerController : MonoBehaviour
         {
             if (pathManager.IsDestination(transform.position))
             {
+                playerAnimation.SetMoveDirection(new Vector2(0, 0));
+                playerAnimation.SetIdle(true);
                 this.enabled = false;
                 GameManager.GameManagerInstance.CompleteLevel();
             }

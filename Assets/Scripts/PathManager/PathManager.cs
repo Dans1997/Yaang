@@ -37,7 +37,7 @@ public class PathManager : MonoBehaviour
 
     [SerializeField] float lightTileTime;
     [Space]
-    [SerializeField] TilePath[] path;
+    TilePath[] path;
 
     // State
     Vector3 startTilePos;
@@ -55,6 +55,8 @@ public class PathManager : MonoBehaviour
         startTilePos = GameObject.FindGameObjectWithTag("Start").transform.position;
         finishTilePos = GameObject.FindGameObjectWithTag("Finish").transform.position;
         exitDoorPos = GameObject.FindGameObjectWithTag("Exit Door").transform.position;
+
+        path = GetComponentsInChildren<TilePath>();
         player = FindObjectOfType<PlayerController>();
         cameraFollow = FindObjectOfType<CameraFollow>();
         audioManager = AudioManager.AudioManagerInstance;

@@ -37,8 +37,6 @@ public class GameManager : MonoBehaviour
     List<Level> levels = new List<Level>();
 
     // Cached Components 
-    Camera mainCamera;
-    Transform playerPos;
     AudioManager audioManager;
 
     private void Awake()
@@ -63,8 +61,6 @@ public class GameManager : MonoBehaviour
             levels.Add(newLevel);
         }
 
-        mainCamera = Camera.main;
-        playerPos = FindObjectOfType<PlayerController>().transform;
         audioManager = AudioManager.AudioManagerInstance;
     }
 
@@ -111,7 +107,8 @@ public class GameManager : MonoBehaviour
 
     IEnumerator CompletionCutscene()
     {
-
+        Camera mainCamera = Camera.main;
+        Transform playerPos = FindObjectOfType<PlayerController>().transform;
         for (float t = 0f; t < 1f; t += Time.deltaTime)
         {
             mainCamera.orthographicSize += Time.deltaTime * 3;
