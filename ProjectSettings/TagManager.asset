@@ -44,8 +44,14 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Finish
+    uniqueID: 250179111
+    locked: 0
   - name: Path
     uniqueID: 1150167817
+    locked: 0
+  - name: Start
+    uniqueID: 1430482803
     locked: 0
   - name: Player
     uniqueID: 3052490915
