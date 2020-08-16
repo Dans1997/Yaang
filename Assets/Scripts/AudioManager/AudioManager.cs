@@ -75,10 +75,11 @@ public class AudioManager : MonoBehaviour
         if (_instance == null)
         {
             _instance = this;
+            DontDestroyOnLoad(gameObject);
         }
         else
         {
-            DontDestroyOnLoad(gameObject);
+            Destroy(gameObject);
             return;
         }
 
@@ -114,6 +115,7 @@ public class AudioManager : MonoBehaviour
                 if (oneShotObj == null)
                 {
                     oneShotObj = new GameObject("Audio Manager One Shot Object");
+                    oneShotObj.transform.parent = transform;
                     oneShotAudioSource = oneShotObj.AddComponent<AudioSource>();
                 }
 
@@ -141,6 +143,7 @@ public class AudioManager : MonoBehaviour
             {
                 GameObject soundGameObject = new GameObject("Audio Manager 3D Object");
                 soundGameObject.transform.position = position;
+                soundGameObject.transform.parent = transform;
                 AudioSource audioSource = soundGameObject.AddComponent<AudioSource>();
 
                 // Audio Source Config

@@ -5,12 +5,14 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     [Header("Player Movement")]
-    [SerializeField] int moveUnit = 2;
     [SerializeField] float transitionTime = 2f;
 
     [Space]
     [Header("Player Power")]
     [SerializeField] bool hasUsedPower = false;
+
+    float moveUnitY = 1f;
+    float moveUnitX = 1.25f;
 
     // State
     bool isIdle = true;
@@ -48,7 +50,7 @@ public class PlayerController : MonoBehaviour
 
     private void HandlePowerInput()
     {
-        if (hasUsedPower) return;
+        //if (hasUsedPower) return;
         if(Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
         {
             hasUsedPower = true;
@@ -59,24 +61,24 @@ public class PlayerController : MonoBehaviour
 
     private void HandleMovementInput()
     {
-        int deltaX = 0;
-        int deltaY = 0;
+        float deltaX = 0;
+        float deltaY = 0;
 
         if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
         {
-            deltaY = moveUnit;
+            deltaY = moveUnitY;
         }
         else if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow))
         {
-            deltaX = moveUnit;
+            deltaX = moveUnitX;
         }
         else if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow))
         {
-            deltaX = -moveUnit;
+            deltaX = -moveUnitX;
         }
         else if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow))
         {
-            deltaY = -moveUnit;
+            deltaY = -moveUnitY;
         }
         else return;
 

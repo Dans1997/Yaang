@@ -40,8 +40,9 @@ public class PathManager : MonoBehaviour
     [SerializeField] TilePath[] path;
 
     // State
-    Vector3 start;
-    Vector3 finish;
+    Vector3 startTilePos;
+    Vector3 finishTilePos;
+    Vector3 exitDoorPos; 
 
     // Cached Components
     PlayerController player;
@@ -51,8 +52,9 @@ public class PathManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        start = GameObject.FindGameObjectWithTag("Start").transform.position;
-        finish = GameObject.FindGameObjectWithTag("Finish").transform.position;
+        startTilePos = GameObject.FindGameObjectWithTag("Start").transform.position;
+        finishTilePos = GameObject.FindGameObjectWithTag("Finish").transform.position;
+        exitDoorPos = GameObject.FindGameObjectWithTag("Exit Door").transform.position;
         player = FindObjectOfType<PlayerController>();
         cameraFollow = FindObjectOfType<CameraFollow>();
         audioManager = AudioManager.AudioManagerInstance;
@@ -67,8 +69,8 @@ public class PathManager : MonoBehaviour
         }
         else
         {
-            player.transform.position = new Vector3(start.x, start.y, player.transform.position.z);
-            cameraFollow.transform.position = new Vector3(start.x, start.y, cameraFollow.transform.position.z);
+            player.transform.position = new Vector3(startTilePos.x, startTilePos.y, player.transform.position.z);
+            cameraFollow.transform.position = new Vector3(startTilePos.x, startTilePos.y, cameraFollow.transform.position.z);
             cameraFollow.SetFollowObject(player.gameObject);
             path[0].LightUp(); // Ligth Up First Tile
             path[0].SetVisit(true);
@@ -89,12 +91,12 @@ public class PathManager : MonoBehaviour
         // Move Player to 1 unit before first tile path
         for (float t = 0f; t < 3f; t += Time.deltaTime)
         {
-            playerPos.position = Vector3.MoveTowards(playerPos.position, start, Time.deltaTime * 2);
-            if (playerPos.position == start) break;
+            playerPos.position = Vector3.MoveTowards(playerPos.position, startTilePos, Time.deltaTime * 2);
+            if (playerPos.position == startTilePos) break;
             audioManager.PlaySound(AudioManager.SoundKey.Footstep);
             yield return 0;
         }
-        playerPos.position = start;
+        playerPos.position = startTilePos;
 
         IsTileValid(player.transform.position);
         yield return new WaitForSeconds(0.7f); // 70% of Tile Light Up Animation Duration
@@ -116,11 +118,18 @@ public class PathManager : MonoBehaviour
             yield return new WaitForSeconds(0.7f); // 70% of Tile Light Up Animation Duration
         }
 
+        // Turn Off All Tiles
         gameObject.BroadcastMessage("TurnOff");
         audioManager.PlaySound(AudioManager.SoundKey.TileLightDown1);
         yield return new WaitForSeconds(1.3f);
 
-        StartCoroutine(cameraFollow.LerpFromTo(cameraFollow.transform.position, player.transform.position, lightTileTime));
+        // Show Exit Door
+        StartCoroutine(cameraFollow.LerpFromTo(cameraFollow.transform.position, exitDoorPos, 2f));
+        yield return new WaitUntil(() => new Vector2(cameraFollow.transform.position.x, cameraFollow.transform.position.y) == new Vector2(exitDoorPos.x, exitDoorPos.y));
+        yield return new WaitForSeconds(2f); // Time to show Exit Door
+
+        // Go to Player Position
+        StartCoroutine(cameraFollow.LerpFromTo(cameraFollow.transform.position, player.transform.position, 3f));
         yield return new WaitUntil(() => new Vector2(cameraFollow.transform.position.x, cameraFollow.transform.position.y) == new Vector2(player.transform.position.x, player.transform.position.y));
 
         cameraFollow.SetFollowObject(player.gameObject);
@@ -142,6 +151,6 @@ public class PathManager : MonoBehaviour
         }
     }
 
-    public bool IsDestination(Vector3 position) => new Vector2(position.x, position.y) == new Vector2(finish.x, finish.y);
+    public bool IsDestination(Vector3 position) => new Vector2(position.x, position.y) == new Vector2(finishTilePos.x, finishTilePos.y);
 
 }

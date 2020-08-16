@@ -46,12 +46,12 @@ MonoBehaviour:
   gameSounds:
   - audioSource: {fileID: 0}
     soundKey: 4
-    clip: {fileID: 8300000, guid: f71a80c05029a5f4485e314788298378, type: 3}
+    clip: {fileID: 8300000, guid: 70dbd71198941434cb61cd84a43b465f, type: 3}
     delay: 0
-    volume: 0
+    volume: 0.35
     pitch: 1
     spatialBlend: 0
-    loop: 0
+    loop: 1
   - audioSource: {fileID: 0}
     soundKey: 0
     clip: {fileID: 8300000, guid: f71a80c05029a5f4485e314788298378, type: 3}
