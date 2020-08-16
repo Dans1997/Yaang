@@ -19,7 +19,7 @@ public class PlayerAnimation : MonoBehaviour
         SetIdle(true);
     }
 
-    public void PlayAnimation(string name) => playerAnimator.Play(name, -1, 0f);
+    public void PlayAnimation(string name) => playerAnimator.Play(name, 0, 0f);
 
     public bool IsAnimationPlaying(string name) => playerAnimator.GetCurrentAnimatorStateInfo(0).IsName(name);
 

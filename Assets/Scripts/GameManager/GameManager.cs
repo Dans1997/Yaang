@@ -109,6 +109,8 @@ public class GameManager : MonoBehaviour
     {
         Camera mainCamera = Camera.main;
         Transform playerPos = FindObjectOfType<PlayerController>().transform;
+        PlayerAnimation playerAnimation = playerPos.GetComponentInChildren<PlayerAnimation>();
+        playerAnimation.PlayAnimation("Move_Up_Loop");
         for (float t = 0f; t < 1f; t += Time.deltaTime)
         {
             mainCamera.orthographicSize += Time.deltaTime * 3;
@@ -116,7 +118,6 @@ public class GameManager : MonoBehaviour
             audioManager.PlaySound(AudioManager.SoundKey.Footstep);
             yield return 0;
         }
-
         // Move player to door?
         // Queue transition?
         yield return new WaitForSeconds(0);

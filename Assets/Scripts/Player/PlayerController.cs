@@ -131,9 +131,9 @@ public class PlayerController : MonoBehaviour
         this.enabled = false;
         yield return new WaitForSeconds(1f);
 
-        StartCoroutine(cameraShake.ShakeCamera(.25f, 1f));
-        audioManager.PlaySound(AudioManager.SoundKey.PlayerGroundHit);
-        yield return new WaitForSeconds(0.5f);
+        //StartCoroutine(cameraShake.ShakeCamera(.25f, 1f));
+        //audioManager.PlaySound(AudioManager.SoundKey.PlayerGroundHit);
+       // yield return new WaitForSeconds(0.5f);
 
         GameManager.GameManagerInstance.FailLevel();
     }

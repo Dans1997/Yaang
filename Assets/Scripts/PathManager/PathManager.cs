@@ -86,11 +86,13 @@ public class PathManager : MonoBehaviour
 
         Camera mainCamera = cameraFollow.GetComponent<Camera>();
         Transform playerPos = player.transform;
+        PlayerAnimation playerAnimation = player.GetComponentInChildren<PlayerAnimation>();
 
         float previousOrthoSize = mainCamera.orthographicSize;
         mainCamera.orthographicSize = 4f;
 
-        // Move Player to 1 unit before first tile path
+        // Move Player to First Tile Path
+        playerAnimation.PlayAnimation("Move_Up_Loop");
         for (float t = 0f; t < 3f; t += Time.deltaTime)
         {
             playerPos.position = Vector3.MoveTowards(playerPos.position, startTilePos, Time.deltaTime * 2);
@@ -98,6 +100,7 @@ public class PathManager : MonoBehaviour
             audioManager.PlaySound(AudioManager.SoundKey.Footstep);
             yield return 0;
         }
+        playerAnimation.PlayAnimation("Idle");
         playerPos.position = startTilePos;
 
         IsTileValid(player.transform.position);
