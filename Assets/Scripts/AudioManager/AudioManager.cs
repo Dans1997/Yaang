@@ -43,6 +43,8 @@ public class AudioManager : MonoBehaviour
         TileLightDown1,
 
         Footstep,
+
+        Reboot
     }
 
     [System.Serializable]
@@ -134,7 +136,7 @@ public class AudioManager : MonoBehaviour
         }
     }
 
-    public void PlaySound(SoundKey soundKey, Vector3 position)
+    public AudioSource PlaySound(SoundKey soundKey, Vector3 position)
     {
         Sound sound = System.Array.Find(gameSounds, s => s.soundKey == soundKey);
         if (sound != null)
@@ -156,18 +158,22 @@ public class AudioManager : MonoBehaviour
                 if (sound.loop)
                 {
                     audioSource.Play();
+                    return audioSource;
                 }
                 else
                 {
                     audioSource.Play();
                     Object.Destroy(soundGameObject, audioSource.clip.length);
+                    return audioSource;
                     // TODO: To improve performace: Object Pooling
                 }
             }
+            else return null;
         }
         else
         {
             Debug.LogError("Sound " + soundKey + "not found!");
+            return null;
         }
     }
 

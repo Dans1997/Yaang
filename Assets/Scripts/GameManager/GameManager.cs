@@ -90,6 +90,13 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void RebootLevel()
+    {
+        int id = SceneManager.GetActiveScene().buildIndex;
+        SetFirstVisit(id, true);
+        SceneLoader.SceneLoaderInstance.ReloadScene();
+    }
+
     public void CompleteLevel()
     {
         int id = SceneManager.GetActiveScene().buildIndex;

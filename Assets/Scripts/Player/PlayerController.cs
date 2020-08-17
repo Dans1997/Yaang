@@ -15,6 +15,7 @@ public class PlayerController : MonoBehaviour
     float moveUnitX = 1.25f;
 
     // State
+    bool wantsToReboot = false;
     bool isIdle = true;
     Vector3 startPos;
 
@@ -41,6 +42,7 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        HandleReboot();
         playerAnimation.SetIdle(isIdle);
         if (!isIdle) return;
 
@@ -136,5 +138,36 @@ public class PlayerController : MonoBehaviour
        // yield return new WaitForSeconds(0.5f);
 
         GameManager.GameManagerInstance.FailLevel();
+    }
+
+    private void HandleReboot()
+    {
+        bool previousWantsToReboot = wantsToReboot;
+        wantsToReboot = Input.GetKey(KeyCode.R);
+        Debug.Log(previousWantsToReboot + " " + wantsToReboot);
+        if (wantsToReboot && !previousWantsToReboot)
+        {
+            StartCoroutine(RebootLevel());
+        }
+    }
+
+    IEnumerator RebootLevel()
+    {
+        Camera mainCamera = Camera.main;
+        float currentOrthoSize = mainCamera.orthographicSize;
+
+        AudioSource rebootAudioSource = AudioManager.AudioManagerInstance.PlaySound(AudioManager.SoundKey.Reboot, transform.position);
+        for (float t = 0f; t < 3f; t += Time.deltaTime)
+        {
+            if (!wantsToReboot)
+            {
+                rebootAudioSource.Stop();
+                break;
+            }
+            mainCamera.orthographicSize -= Time.deltaTime * 0.5f;
+            yield return 0;
+        }
+        if (wantsToReboot) GameManager.GameManagerInstance.RebootLevel();
+        else mainCamera.orthographicSize = currentOrthoSize;
     }
 }
