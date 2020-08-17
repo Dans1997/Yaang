@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityStandardAssets.CrossPlatformInput;
 public class PlayerController : MonoBehaviour
 {
     [Header("Player Movement")]
@@ -53,7 +53,7 @@ public class PlayerController : MonoBehaviour
     private void HandlePowerInput()
     {
         //if (hasUsedPower) return;
-        if(Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
+        if(Input.GetKeyDown(KeyCode.Space))
         {
             hasUsedPower = true;
             playerPower.SetTrigger("activateTrigger");
@@ -63,32 +63,61 @@ public class PlayerController : MonoBehaviour
 
     private void HandleMovementInput()
     {
-        float deltaX = 0;
-        float deltaY = 0;
+        float moveX = CrossPlatformInputManager.GetAxisRaw("Horizontal");
+        float moveY = CrossPlatformInputManager.GetAxisRaw("Vertical");
+        bool downPressed = CrossPlatformInputManager.GetButtonDown("Down");
+        bool upPressed = CrossPlatformInputManager.GetButtonDown("Up");
+        bool rightPressed = CrossPlatformInputManager.GetButtonDown("Right");
+        bool leftPressed = CrossPlatformInputManager.GetButtonDown("Left");
 
-        if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
-        {
-            deltaY = moveUnitY;
-        }
-        else if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow))
-        {
-            deltaX = moveUnitX;
-        }
-        else if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow))
-        {
-            deltaX = -moveUnitX;
-        }
-        else if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow))
-        {
-            deltaY = -moveUnitY;
-        }
-        else return;
+        bool pressedAnyButton = !downPressed || !upPressed || !rightPressed || !leftPressed;
+        bool usedJoystick = Mathf.Abs(moveX) >= Mathf.Epsilon || Mathf.Abs(moveY) >= Mathf.Epsilon;
 
-        playerAnimation.SetMoveDirection(new Vector2(deltaX, deltaY));
+        if (!usedJoystick && !pressedAnyButton)
+        {
+            playerAnimation.SetIdle(isIdle);
+            return;
+        }
+
+        // DOWN
+        if ((moveX == 0 && moveY == -1) || downPressed)
+        {
+ 
+            playerAnimation.SetMoveDirection(new Vector2(0,-1));
+            MovePlayer(0, -moveUnitY);
+            return;
+        }
+
+        // RIGHT
+        if ((moveX == 1 && moveY == 0) || rightPressed)
+        {
+            playerAnimation.SetMoveDirection(new Vector2(1, 0));
+            MovePlayer(moveUnitX, 0);
+            return;
+        }
+
+        // UP
+        if ((moveX == 0 && moveY == 1) || upPressed)
+        {
+            playerAnimation.SetMoveDirection(new Vector2(0, 1));
+            MovePlayer(0, moveUnitY);
+            return;
+        }
+
+        // LEFT
+        if ((moveX == -1 && moveY == 0) || leftPressed)
+        {
+            playerAnimation.SetMoveDirection(new Vector2(-1, 0));
+            MovePlayer(-moveUnitX, 0);
+            return;
+        }
+    }
+
+    private void MovePlayer(float deltaX, float deltaY)
+    {
         audioManager.PlaySound(AudioManager.SoundKey.PlayerMove);
 
         Vector3 destination = new Vector3(transform.position.x + deltaX, transform.position.y + deltaY, transform.position.z);
-
         StartCoroutine(LerpFromTo(transform.position, destination, transitionTime));
     }
 
@@ -101,11 +130,11 @@ public class PlayerController : MonoBehaviour
             transform.position = Vector3.Lerp(pos1, pos2, t / duration);
             yield return 0;
         }
-        isIdle = true;
         transform.position = pos2;
 
         // Check if the tile is valid or not
         CheckPlayerPosition();
+        isIdle = true;
     }
 
     private void CheckPlayerPosition()
@@ -143,8 +172,7 @@ public class PlayerController : MonoBehaviour
     private void HandleReboot()
     {
         bool previousWantsToReboot = wantsToReboot;
-        wantsToReboot = Input.GetKey(KeyCode.R);
-        Debug.Log(previousWantsToReboot + " " + wantsToReboot);
+        wantsToReboot = Input.GetKey(KeyCode.R) || CrossPlatformInputManager.GetButton("Reboot");
         if (wantsToReboot && !previousWantsToReboot)
         {
             StartCoroutine(RebootLevel());
