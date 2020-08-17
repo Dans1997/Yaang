@@ -28,7 +28,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4579419663347120165}
-  m_RootOrder: 2
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4579419662453522003
 GameObject:
@@ -254,12 +254,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4579419663347120186}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -6, y: 4.85, z: 10}
+  m_LocalPosition: {x: -1, y: 4.8499994, z: 10}
   m_LocalScale: {x: 9, y: 9, z: 1}
   m_Children:
+  - {fileID: 1763009636799996360}
   - {fileID: 7895729644882273326}
   - {fileID: 7895729645133514557}
-  - {fileID: 1763009636799996360}
   - {fileID: 7895729644916704634}
   - {fileID: 7895729645326168558}
   m_Father: {fileID: 4579419662884595968}
@@ -516,7 +516,7 @@ PrefabInstance:
     - target: {fileID: 5917195189639984251, guid: cbf92ee81079e5b48aeb2d37cd1f8dc1,
         type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5917195189639984251, guid: cbf92ee81079e5b48aeb2d37cd1f8dc1,
         type: 3}
@@ -553,6 +553,11 @@ PrefabInstance:
       propertyPath: m_ApplyToSortingLayers.Array.data[1]
       value: 250179111
       objectReference: {fileID: 0}
+    - target: {fileID: 5917195191060515877, guid: cbf92ee81079e5b48aeb2d37cd1f8dc1,
+        type: 3}
+      propertyPath: m_Intensity
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cbf92ee81079e5b48aeb2d37cd1f8dc1, type: 3}
 --- !u!4 &7895729645133514557 stripped
@@ -571,7 +576,7 @@ PrefabInstance:
     - target: {fileID: 5917195189639984250, guid: cbf92ee81079e5b48aeb2d37cd1f8dc1,
         type: 3}
       propertyPath: m_Name
-      value: Torch_Front (2)
+      value: Torch_Front
       objectReference: {fileID: 0}
     - target: {fileID: 5917195189639984251, guid: cbf92ee81079e5b48aeb2d37cd1f8dc1,
         type: 3}
@@ -648,6 +653,11 @@ PrefabInstance:
       propertyPath: m_ApplyToSortingLayers.Array.data[1]
       value: 250179111
       objectReference: {fileID: 0}
+    - target: {fileID: 5917195191060515877, guid: cbf92ee81079e5b48aeb2d37cd1f8dc1,
+        type: 3}
+      propertyPath: m_Intensity
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cbf92ee81079e5b48aeb2d37cd1f8dc1, type: 3}
 --- !u!4 &7895729645326168558 stripped
@@ -706,7 +716,7 @@ PrefabInstance:
     - target: {fileID: 5917195189639984251, guid: cbf92ee81079e5b48aeb2d37cd1f8dc1,
         type: 3}
       propertyPath: m_RootOrder
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5917195189639984251, guid: cbf92ee81079e5b48aeb2d37cd1f8dc1,
         type: 3}
@@ -743,6 +753,11 @@ PrefabInstance:
       propertyPath: m_ApplyToSortingLayers.Array.data[1]
       value: 250179111
       objectReference: {fileID: 0}
+    - target: {fileID: 5917195191060515877, guid: cbf92ee81079e5b48aeb2d37cd1f8dc1,
+        type: 3}
+      propertyPath: m_Intensity
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cbf92ee81079e5b48aeb2d37cd1f8dc1, type: 3}
 --- !u!4 &7895729644882273326 stripped
@@ -761,7 +776,7 @@ PrefabInstance:
     - target: {fileID: 5917195189639984250, guid: cbf92ee81079e5b48aeb2d37cd1f8dc1,
         type: 3}
       propertyPath: m_Name
-      value: Torch_Front (1)
+      value: Torch_Front
       objectReference: {fileID: 0}
     - target: {fileID: 5917195189639984251, guid: cbf92ee81079e5b48aeb2d37cd1f8dc1,
         type: 3}
@@ -837,6 +852,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_ApplyToSortingLayers.Array.data[1]
       value: 250179111
+      objectReference: {fileID: 0}
+    - target: {fileID: 5917195191060515877, guid: cbf92ee81079e5b48aeb2d37cd1f8dc1,
+        type: 3}
+      propertyPath: m_Intensity
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cbf92ee81079e5b48aeb2d37cd1f8dc1, type: 3}
