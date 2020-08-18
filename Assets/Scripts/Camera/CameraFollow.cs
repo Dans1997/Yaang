@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class CameraFollow : MonoBehaviour
 {
-    [SerializeField] Vector2 followOffset;
+    [SerializeField] Vector2 followOffset = new Vector2(0, 0);
     [SerializeField] float moveSpeed = 3f;
     [SerializeField] float cameraOrthoSize = 4.5f;
 
     [Header("Camera Bounds")]
-    [SerializeField] float minXPos, maxXPos, minYPos, maxYPos;
+    [SerializeField] float minXPos = 0f, maxXPos = 0f, minYPos = 0f, maxYPos = 0f;
 
     // Cached Components
     GameObject followObject = null;

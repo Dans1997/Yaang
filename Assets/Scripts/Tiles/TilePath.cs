@@ -7,6 +7,8 @@ public class TilePath : MonoBehaviour
     // State
     bool wasVisited = false;
 
+    public bool WasVisited() => wasVisited;
+
     public void SetVisit(bool visited) => wasVisited = visited;
 
     public void LightUp()
@@ -20,5 +22,12 @@ public class TilePath : MonoBehaviour
     public void TurnOff()
     {
         GetComponent<Animator>().SetTrigger("lightDownTrigger");
+    }
+
+    public IEnumerator LightUpTemporarily(float duration)
+    {
+        LightUp();
+        yield return new WaitForSeconds(duration);
+        TurnOff();
     }
 }

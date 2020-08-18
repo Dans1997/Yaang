@@ -29,15 +29,14 @@ public class PathManager : MonoBehaviour
 
     #endregion Singleton
 
-    public class Tile
+    /*public class Tile
     {
         bool isVisited = false;
         // Todo: Maybe add colors here?
-    }
+    }*/
 
-    [SerializeField] float lightTileTime;
-    [Space]
-    TilePath[] path;
+    [SerializeField] float lightTileTime = 0f;
+
 
     // State
     Vector3 startTilePos;
@@ -48,6 +47,7 @@ public class PathManager : MonoBehaviour
     PlayerController player;
     CameraFollow cameraFollow;
     AudioManager audioManager;
+    TilePath[] path;
 
     // Start is called before the first frame update
     void Start()
