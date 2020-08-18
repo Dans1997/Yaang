@@ -62,9 +62,13 @@ public class PlayerController : MonoBehaviour
         float moveX = CrossPlatformInputManager.GetAxisRaw("Horizontal");
         float moveY = CrossPlatformInputManager.GetAxisRaw("Vertical");
         bool downPressed = CrossPlatformInputManager.GetButtonDown("Down");
-        bool upPressed = CrossPlatformInputManager.GetButtonDown("Up");
+        bool downRightPressed = CrossPlatformInputManager.GetButtonDown("Down_Right");
         bool rightPressed = CrossPlatformInputManager.GetButtonDown("Right");
+        bool rightUpPressed = CrossPlatformInputManager.GetButtonDown("Right_Up");
+        bool upPressed = CrossPlatformInputManager.GetButtonDown("Up");
+        bool upLeftPressed = CrossPlatformInputManager.GetButtonDown("Up_Left");
         bool leftPressed = CrossPlatformInputManager.GetButtonDown("Left");
+        bool leftDownPressed = CrossPlatformInputManager.GetButtonDown("Left_Down");
 
         bool pressedAnyButton = !downPressed || !upPressed || !rightPressed || !leftPressed;
         bool usedJoystick = Mathf.Abs(moveX) >= Mathf.Epsilon || Mathf.Abs(moveY) >= Mathf.Epsilon;
@@ -79,32 +83,66 @@ public class PlayerController : MonoBehaviour
         if ((moveX == 0 && moveY == -1) || downPressed)
         {
  
-            playerAnimation.SetMoveDirection(new Vector2(0,-1));
+            playerAnimation.SetMoveDirection(new Vector2(moveX, moveY));
             MovePlayer(0, -moveUnitY);
+            return;
+        }
+
+        // DOWN_RIGHT
+        if ((moveX == 1 && moveY == -1) || downRightPressed)
+        {
+
+            playerAnimation.SetMoveDirection(new Vector2(moveX, moveY));
+            MovePlayer(moveUnitX, -moveUnitY);
             return;
         }
 
         // RIGHT
         if ((moveX == 1 && moveY == 0) || rightPressed)
         {
-            playerAnimation.SetMoveDirection(new Vector2(1, 0));
+            playerAnimation.SetMoveDirection(new Vector2(moveX, moveY));
             MovePlayer(moveUnitX, 0);
+            return;
+        }
+
+        // RIGHT_UP
+        if ((moveX == 1 && moveY == 1) || rightUpPressed)
+        {
+
+            playerAnimation.SetMoveDirection(new Vector2(moveX, moveY));
+            MovePlayer(moveUnitX, moveUnitY);
             return;
         }
 
         // UP
         if ((moveX == 0 && moveY == 1) || upPressed)
         {
-            playerAnimation.SetMoveDirection(new Vector2(0, 1));
+            playerAnimation.SetMoveDirection(new Vector2(moveX, moveY));
             MovePlayer(0, moveUnitY);
+            return;
+        }
+
+        // UP_LEFT
+        if ((moveX == -1 && moveY == 1) || upLeftPressed)
+        {
+            playerAnimation.SetMoveDirection(new Vector2(moveX, moveY));
+            MovePlayer(-moveUnitX, moveUnitY);
             return;
         }
 
         // LEFT
         if ((moveX == -1 && moveY == 0) || leftPressed)
         {
-            playerAnimation.SetMoveDirection(new Vector2(-1, 0));
+            playerAnimation.SetMoveDirection(new Vector2(moveX, moveY));
             MovePlayer(-moveUnitX, 0);
+            return;
+        }
+
+        // LEFT_DOWN
+        if ((moveX == -1 && moveY == -1) || leftDownPressed)
+        {
+            playerAnimation.SetMoveDirection(new Vector2(moveX, moveY));
+            MovePlayer(-moveUnitX, -moveUnitY);
             return;
         }
     }

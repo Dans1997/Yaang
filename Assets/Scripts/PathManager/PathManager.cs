@@ -37,7 +37,6 @@ public class PathManager : MonoBehaviour
 
     [SerializeField] float lightTileTime = 0f;
 
-
     // State
     Vector3 startTilePos;
     Vector3 finishTilePos;
