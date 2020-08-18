@@ -214,12 +214,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 143472614}
   m_PrefabAsset: {fileID: 0}
---- !u!20 &405865650 stripped
-Camera:
-  m_CorrespondingSourceObject: {fileID: 4400891073033364964, guid: 78bd64f5d3f223c4ab0963f31eaa07fd,
-    type: 3}
-  m_PrefabInstance: {fileID: 4400891073071865243}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &588498497
 GameObject:
   m_ObjectHideFlags: 0
@@ -269,21 +263,66 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 6221005581589507061}
   m_PrefabAsset: {fileID: 0}
---- !u!1001 &982115561
+--- !u!1 &1122013039
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1122013040}
+  - component: {fileID: 1122013041}
+  m_Layer: 0
+  m_Name: PathManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1122013040
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1122013039}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 802739070}
+  - {fileID: 1937228858}
+  - {fileID: 143472615}
+  - {fileID: 1797429499}
+  - {fileID: 2055574713}
+  m_Father: {fileID: 0}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1122013041
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1122013039}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b0123b0e4c989647a3ab126c32cfff9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lightTileTime: 0.5
+--- !u!1001 &1243482267
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1012760547, guid: 83a1dec5b5c8a494ebeb16618278db8b, type: 3}
-      propertyPath: m_Camera
-      value: 
-      objectReference: {fileID: 405865650}
     - target: {fileID: 7994884970426816540, guid: 83a1dec5b5c8a494ebeb16618278db8b,
         type: 3}
       propertyPath: m_Name
-      value: Player
+      value: Player 4D
       objectReference: {fileID: 0}
     - target: {fileID: 7994884970426816541, guid: 83a1dec5b5c8a494ebeb16618278db8b,
         type: 3}
@@ -342,55 +381,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 83a1dec5b5c8a494ebeb16618278db8b, type: 3}
---- !u!1 &1122013039
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1122013040}
-  - component: {fileID: 1122013041}
-  m_Layer: 0
-  m_Name: PathManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1122013040
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1122013039}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 802739070}
-  - {fileID: 1937228858}
-  - {fileID: 143472615}
-  - {fileID: 1797429499}
-  - {fileID: 2055574713}
-  m_Father: {fileID: 0}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1122013041
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1122013039}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4b0123b0e4c989647a3ab126c32cfff9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  lightTileTime: 0.5
 --- !u!1 &1661858499
 GameObject:
   m_ObjectHideFlags: 0
