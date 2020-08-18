@@ -45,6 +45,7 @@ public class PathManager : MonoBehaviour
 
     // Cached Components
     PlayerController player;
+    Canvas playerHUD;
     CameraFollow cameraFollow;
     AudioManager audioManager;
     TilePath[] path;
@@ -58,6 +59,7 @@ public class PathManager : MonoBehaviour
 
         path = GetComponentsInChildren<TilePath>();
         player = FindObjectOfType<PlayerController>();
+        playerHUD = GameObject.FindGameObjectWithTag("Player HUD").GetComponent<Canvas>();
         cameraFollow = FindObjectOfType<CameraFollow>();
         audioManager = AudioManager.AudioManagerInstance;
 
@@ -82,6 +84,7 @@ public class PathManager : MonoBehaviour
     IEnumerator StartLevel()
     {
         player.enabled = false;
+        playerHUD.enabled = false;
         yield return new WaitForSeconds(0.7f); // 70% of Transition Duration
 
         Camera mainCamera = cameraFollow.GetComponent<Camera>();
@@ -129,6 +132,7 @@ public class PathManager : MonoBehaviour
 
         cameraFollow.SetMoveSpeed(3f);
         player.enabled = true;
+        playerHUD.enabled = true;
     }
 
     public bool IsTileValid(Vector3 position)

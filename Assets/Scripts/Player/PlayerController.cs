@@ -17,25 +17,21 @@ public class PlayerController : MonoBehaviour
     // State
     bool wantsToReboot = false;
     bool isIdle = true;
-    Vector3 startPos;
 
     // Cached Components
     PathManager pathManager;
     PlayerAnimation playerAnimation;
     AudioManager audioManager;
-    CameraShake cameraShake;
     Animator playerPower;
 
     // Start is called before the first frame update
     void Start()
     {
-        startPos = transform.position;
         isIdle = true;
 
         pathManager = PathManager.PathManagerInstance;
         playerAnimation = GetComponentInChildren<PlayerAnimation>();
         audioManager = AudioManager.AudioManagerInstance;
-        cameraShake = FindObjectOfType<CameraShake>();
         playerPower = GameObject.FindGameObjectWithTag("PlayerPower").GetComponent<Animator>();
     }
 
