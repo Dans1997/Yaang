@@ -79,7 +79,6 @@ public class PlayerController : MonoBehaviour
 
         if (!usedJoystick && !pressedAnyButton)
         {
-            Debug.Log("Idle.");
             playerAnimation.SetIdle(true);
             return;
         }
@@ -176,10 +175,13 @@ public class PlayerController : MonoBehaviour
         {
             if (pathManager.IsDestination(transform.position))
             {
-                playerAnimation.SetMoveDirection(new Vector2(0, 0));
-                playerAnimation.SetIdle(true);
-                this.enabled = false;
-                GameManager.GameManagerInstance.CompleteLevel();
+                if(pathManager.AreAllTilesLitUp())
+                {
+                    playerAnimation.SetMoveDirection(new Vector2(0, 0));
+                    playerAnimation.SetIdle(true);
+                    this.enabled = false;
+                    GameManager.GameManagerInstance.CompleteLevel();
+                }
             }
         }
         else

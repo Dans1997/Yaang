@@ -29,13 +29,8 @@ public class PathManager : MonoBehaviour
 
     #endregion Singleton
 
-    /*public class Tile
-    {
-        bool isVisited = false;
-        // Todo: Maybe add colors here?
-    }*/
-
     [SerializeField] float lightTileTime = 0f;
+    [SerializeField] bool requiresAllTiles = false;
 
     // State
     Vector3 startTilePos;
@@ -151,4 +146,13 @@ public class PathManager : MonoBehaviour
 
     public bool IsDestination(Vector3 position) => new Vector2(position.x, position.y) == new Vector2(finishTilePos.x, finishTilePos.y);
 
+    public bool AreAllTilesLitUp()
+    {
+        if (!requiresAllTiles) return true;
+        foreach (TilePath tile in path)
+        {
+            if (!tile.WasVisited()) return false;
+        }
+        return true;
+    }
 }

@@ -497,6 +497,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lightTileTime: 0.15
+  requiresAllTiles: 1
 --- !u!1001 &1181592594
 PrefabInstance:
   m_ObjectHideFlags: 0
