@@ -52,7 +52,7 @@ public class PlayerController : MonoBehaviour
 
     private void HandlePowerInput()
     {
-        //if (hasUsedPower) return;
+        if (hasUsedPower) return;
         if(Input.GetKeyDown(KeyCode.Space) || CrossPlatformInputManager.GetButtonDown("PowerButton"))
         {
             hasUsedPower = true;

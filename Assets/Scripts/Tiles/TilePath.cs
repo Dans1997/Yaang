@@ -24,10 +24,10 @@ public class TilePath : MonoBehaviour
         GetComponent<Animator>().SetTrigger("lightDownTrigger");
     }
 
-    public IEnumerator LightUpTemporarily(float duration)
+    public IEnumerator LightUpTemporarily()
     {
         LightUp();
-        yield return new WaitForSeconds(duration);
+        yield return 0;
         TurnOff();
     }
 }

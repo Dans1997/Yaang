@@ -4,16 +4,25 @@ using UnityEngine;
 
 public class PlayerPower : MonoBehaviour
 {
-    [Tooltip("Duration the tile keeps lit until starting to turn off.")]
-    [SerializeField] float duration = 0f; 
+    [Tooltip("Maximum number of tiles the power lights up.")]
+    [SerializeField] int maxTiles = 4; 
+
+    // State
+    int tilesLit = 0;
     
     private void OnTriggerEnter2D(Collider2D collision)
     {
         TilePath tilePath = collision.gameObject.GetComponent<TilePath>();
-        if(tilePath != null)
+        if (tilePath != null)
         {
-            if(!tilePath.WasVisited())
-                StartCoroutine(tilePath.LightUpTemporarily(duration));
+            if (!tilePath.WasVisited())
+            {
+                if (++tilesLit <= maxTiles)
+                {
+                    StartCoroutine(tilePath.LightUpTemporarily());
+                }
+            }
+
         }
     }
 }
