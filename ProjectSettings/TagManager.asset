@@ -8,6 +8,7 @@ TagManager:
   - Start
   - Exit Door
   - Player HUD
+  - PlayerPowerHUD
   layers:
   - Default
   - TransparentFX

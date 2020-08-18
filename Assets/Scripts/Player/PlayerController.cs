@@ -23,6 +23,7 @@ public class PlayerController : MonoBehaviour
     PlayerAnimation playerAnimation;
     AudioManager audioManager;
     Animator playerPower;
+    Animator playerPowerHUD;
 
     // Start is called before the first frame update
     void Start()
@@ -33,6 +34,7 @@ public class PlayerController : MonoBehaviour
         playerAnimation = GetComponentInChildren<PlayerAnimation>();
         audioManager = AudioManager.AudioManagerInstance;
         playerPower = GameObject.FindGameObjectWithTag("PlayerPower").GetComponent<Animator>();
+        playerPowerHUD = GameObject.FindGameObjectWithTag("PlayerPowerHUD").GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -53,6 +55,7 @@ public class PlayerController : MonoBehaviour
         {
             hasUsedPower = true;
             playerPower.SetTrigger("activateTrigger");
+            playerPowerHUD.SetTrigger("activateTrigger");
             audioManager.PlaySound(AudioManager.SoundKey.PlayerPower);
         }
     }
@@ -211,7 +214,7 @@ public class PlayerController : MonoBehaviour
         if (wantsToReboot && !previousWantsToReboot)
         {
             StartCoroutine(RebootLevel());
-            //TODO SET REBOOT BUTTON UP BEFORE REBOOTING
+            //TODO: SET REBOOT BUTTON UP BEFORE REBOOTING
         }
     }
 
