@@ -70,88 +70,87 @@ public class PlayerController : MonoBehaviour
         bool leftPressed = CrossPlatformInputManager.GetButtonDown("Left");
         bool leftDownPressed = CrossPlatformInputManager.GetButtonDown("Left_Down");
 
-        bool pressedAnyButton = !downPressed || !upPressed || !rightPressed || !leftPressed;
-        bool usedJoystick = Mathf.Abs(moveX) >= Mathf.Epsilon || Mathf.Abs(moveY) >= Mathf.Epsilon;
+        bool pressedAnyButton = downPressed || upPressed || rightPressed || leftPressed
+            || downRightPressed || rightUpPressed || upLeftPressed || leftDownPressed;
+
+        bool usedXAxis = Mathf.Abs(moveX) >= 0.5f;
+        bool usedYAxis = Mathf.Abs(moveY) >= 0.5f;
+        bool usedJoystick = usedXAxis || usedYAxis;
 
         if (!usedJoystick && !pressedAnyButton)
         {
-            playerAnimation.SetIdle(isIdle);
+            Debug.Log("Idle.");
+            playerAnimation.SetIdle(true);
             return;
         }
 
+        if (usedXAxis) moveX = Mathf.Sign(moveX) * 1f;
+        if (usedYAxis) moveY = Mathf.Sign(moveY) * 1f;
+
         // DOWN
-        if ((moveX == 0 && moveY == -1) || downPressed)
+        if (downPressed)
         {
- 
-            playerAnimation.SetMoveDirection(new Vector2(moveX, moveY));
-            MovePlayer(0, -moveUnitY);
-            return;
+            moveX = 0f;
+            moveY = -1f;
         }
 
         // DOWN_RIGHT
-        if ((moveX == 1 && moveY == -1) || downRightPressed)
+        if (downRightPressed)
         {
-
-            playerAnimation.SetMoveDirection(new Vector2(moveX, moveY));
-            MovePlayer(moveUnitX, -moveUnitY);
-            return;
+            moveX = 1f;
+            moveY = -1f;
         }
 
         // RIGHT
-        if ((moveX == 1 && moveY == 0) || rightPressed)
+        if (rightPressed)
         {
-            playerAnimation.SetMoveDirection(new Vector2(moveX, moveY));
-            MovePlayer(moveUnitX, 0);
-            return;
+            moveX = 1f;
+            moveY = 0f;
         }
 
         // RIGHT_UP
-        if ((moveX == 1 && moveY == 1) || rightUpPressed)
+        if (rightUpPressed)
         {
-
-            playerAnimation.SetMoveDirection(new Vector2(moveX, moveY));
-            MovePlayer(moveUnitX, moveUnitY);
-            return;
+            moveX = 1f;
+            moveY = 1f;
         }
 
         // UP
-        if ((moveX == 0 && moveY == 1) || upPressed)
+        if (upPressed)
         {
-            playerAnimation.SetMoveDirection(new Vector2(moveX, moveY));
-            MovePlayer(0, moveUnitY);
-            return;
+            moveX = 0f;
+            moveY = 1f;
         }
 
         // UP_LEFT
-        if ((moveX == -1 && moveY == 1) || upLeftPressed)
+        if (upLeftPressed)
         {
-            playerAnimation.SetMoveDirection(new Vector2(moveX, moveY));
-            MovePlayer(-moveUnitX, moveUnitY);
-            return;
+            moveX = -1f;
+            moveY = 1f;
         }
 
         // LEFT
-        if ((moveX == -1 && moveY == 0) || leftPressed)
+        if (leftPressed)
         {
-            playerAnimation.SetMoveDirection(new Vector2(moveX, moveY));
-            MovePlayer(-moveUnitX, 0);
-            return;
+            moveX = -1f;
+            moveY = 0f;
         }
 
         // LEFT_DOWN
-        if ((moveX == -1 && moveY == -1) || leftDownPressed)
+        if (leftDownPressed)
         {
-            playerAnimation.SetMoveDirection(new Vector2(moveX, moveY));
-            MovePlayer(-moveUnitX, -moveUnitY);
-            return;
+            moveX = -1f;
+            moveY = -1f;
         }
+
+        MovePlayer(moveX, moveY);
     }
 
-    private void MovePlayer(float deltaX, float deltaY)
+    private void MovePlayer(float moveX, float moveY)
     {
         audioManager.PlaySound(AudioManager.SoundKey.PlayerMove);
-
-        Vector3 destination = new Vector3(transform.position.x + deltaX, transform.position.y + deltaY, transform.position.z);
+        playerAnimation.SetMoveDirection(new Vector2(moveX, moveY));
+        Vector3 destination = new Vector3(transform.position.x + moveX * moveUnitX, transform.position.y + moveY * moveUnitY, transform.position.z);
         StartCoroutine(LerpFromTo(transform.position, destination, transitionTime));
     }
 
@@ -210,6 +209,7 @@ public class PlayerController : MonoBehaviour
         if (wantsToReboot && !previousWantsToReboot)
         {
             StartCoroutine(RebootLevel());
+            //TODO SET REBOOT BUTTON UP BEFORE REBOOTING
         }
     }
 
