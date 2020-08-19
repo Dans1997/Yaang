@@ -254,7 +254,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4579419663347120186}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1, y: 4.8499994, z: 10}
+  m_LocalPosition: {x: 0.25, y: 5.8499994, z: 10}
   m_LocalScale: {x: 9, y: 9, z: 1}
   m_Children:
   - {fileID: 1763009636799996360}
@@ -383,6 +383,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5917195191060515877, guid: cbf92ee81079e5b48aeb2d37cd1f8dc1,
+        type: 3}
+      propertyPath: m_Intensity
+      value: 5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cbf92ee81079e5b48aeb2d37cd1f8dc1, type: 3}
 --- !u!4 &4737587059649178653 stripped
@@ -457,6 +462,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5917195191060515877, guid: cbf92ee81079e5b48aeb2d37cd1f8dc1,
+        type: 3}
+      propertyPath: m_Intensity
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cbf92ee81079e5b48aeb2d37cd1f8dc1, type: 3}
@@ -556,7 +566,7 @@ PrefabInstance:
     - target: {fileID: 5917195191060515877, guid: cbf92ee81079e5b48aeb2d37cd1f8dc1,
         type: 3}
       propertyPath: m_Intensity
-      value: 6
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cbf92ee81079e5b48aeb2d37cd1f8dc1, type: 3}
@@ -656,7 +666,7 @@ PrefabInstance:
     - target: {fileID: 5917195191060515877, guid: cbf92ee81079e5b48aeb2d37cd1f8dc1,
         type: 3}
       propertyPath: m_Intensity
-      value: 6
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cbf92ee81079e5b48aeb2d37cd1f8dc1, type: 3}
@@ -756,7 +766,7 @@ PrefabInstance:
     - target: {fileID: 5917195191060515877, guid: cbf92ee81079e5b48aeb2d37cd1f8dc1,
         type: 3}
       propertyPath: m_Intensity
-      value: 6
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cbf92ee81079e5b48aeb2d37cd1f8dc1, type: 3}
@@ -856,7 +866,7 @@ PrefabInstance:
     - target: {fileID: 5917195191060515877, guid: cbf92ee81079e5b48aeb2d37cd1f8dc1,
         type: 3}
       propertyPath: m_Intensity
-      value: 6
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cbf92ee81079e5b48aeb2d37cd1f8dc1, type: 3}
