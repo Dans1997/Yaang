@@ -26,6 +26,8 @@ public class PlayerController : MonoBehaviour
     Animator playerPowerHUD;
     ParticleSystem powerParticles;
 
+    public Vector2 GetMoveUnits() => new Vector2(moveUnitX, moveUnitY);
+
     // Start is called before the first frame update
     void Start()
     {
