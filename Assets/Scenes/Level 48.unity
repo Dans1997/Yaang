@@ -2662,16 +2662,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Golden Cave
       objectReference: {fileID: 0}
-    - target: {fileID: 5227100628637549831, guid: d67a0e268dd62ef4aa9178dde93bfacd,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -0.25
-      objectReference: {fileID: 0}
-    - target: {fileID: 5227100628637549831, guid: d67a0e268dd62ef4aa9178dde93bfacd,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 5
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d67a0e268dd62ef4aa9178dde93bfacd, type: 3}
 --- !u!1001 &6221005581589507061
