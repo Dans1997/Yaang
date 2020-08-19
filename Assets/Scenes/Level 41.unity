@@ -279,7 +279,7 @@ PrefabInstance:
     - target: {fileID: 6221005580904282249, guid: 9a7e41a71d9192946abab8f2561f434e,
         type: 3}
       propertyPath: m_Name
-      value: Tile Path 1
+      value: 1.25,-3.25
       objectReference: {fileID: 0}
     - target: {fileID: 6221005580904282249, guid: 9a7e41a71d9192946abab8f2561f434e,
         type: 3}
@@ -385,7 +385,7 @@ PrefabInstance:
     - target: {fileID: 6221005580904282249, guid: 9a7e41a71d9192946abab8f2561f434e,
         type: 3}
       propertyPath: m_Name
-      value: Tile Path 5
+      value: 3.75,-1.25
       objectReference: {fileID: 0}
     - target: {fileID: 6221005580904282249, guid: 9a7e41a71d9192946abab8f2561f434e,
         type: 3}
@@ -624,7 +624,7 @@ PrefabInstance:
     - target: {fileID: 6221005580904282249, guid: 9a7e41a71d9192946abab8f2561f434e,
         type: 3}
       propertyPath: m_Name
-      value: Tile Path 8
+      value: 5,1.75
       objectReference: {fileID: 0}
     - target: {fileID: 6221005580904282249, guid: 9a7e41a71d9192946abab8f2561f434e,
         type: 3}
@@ -724,7 +724,7 @@ PrefabInstance:
     - target: {fileID: 6221005580904282249, guid: 9a7e41a71d9192946abab8f2561f434e,
         type: 3}
       propertyPath: m_Name
-      value: Tile Path 6
+      value: 5,-0.25
       objectReference: {fileID: 0}
     - target: {fileID: 6221005580904282249, guid: 9a7e41a71d9192946abab8f2561f434e,
         type: 3}
@@ -818,7 +818,7 @@ PrefabInstance:
     - target: {fileID: 6221005580904282249, guid: 9a7e41a71d9192946abab8f2561f434e,
         type: 3}
       propertyPath: m_Name
-      value: Tile Path 3
+      value: 3.75,-3.25
       objectReference: {fileID: 0}
     - target: {fileID: 6221005580904282249, guid: 9a7e41a71d9192946abab8f2561f434e,
         type: 3}
@@ -978,7 +978,7 @@ PrefabInstance:
     - target: {fileID: 6221005580904282249, guid: 9a7e41a71d9192946abab8f2561f434e,
         type: 3}
       propertyPath: m_Name
-      value: Tile Path 7
+      value: 3.75,0.75
       objectReference: {fileID: 0}
     - target: {fileID: 6221005580904282249, guid: 9a7e41a71d9192946abab8f2561f434e,
         type: 3}
@@ -1072,7 +1072,7 @@ PrefabInstance:
     - target: {fileID: 6221005580904282249, guid: 9a7e41a71d9192946abab8f2561f434e,
         type: 3}
       propertyPath: m_Name
-      value: Tile Path 4
+      value: 5,-2.25
       objectReference: {fileID: 0}
     - target: {fileID: 6221005580904282249, guid: 9a7e41a71d9192946abab8f2561f434e,
         type: 3}
@@ -1283,7 +1283,7 @@ PrefabInstance:
     - target: {fileID: 6221005580904282249, guid: 9a7e41a71d9192946abab8f2561f434e,
         type: 3}
       propertyPath: m_Name
-      value: Tile Path 2
+      value: 2.5,-4.25
       objectReference: {fileID: 0}
     - target: {fileID: 6221005580904282249, guid: 9a7e41a71d9192946abab8f2561f434e,
         type: 3}
@@ -1651,6 +1651,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Golden Cave
+      objectReference: {fileID: 0}
+    - target: {fileID: 5227100628637549831, guid: d67a0e268dd62ef4aa9178dde93bfacd,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 6.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 5227100628637549831, guid: d67a0e268dd62ef4aa9178dde93bfacd,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.75
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d67a0e268dd62ef4aa9178dde93bfacd, type: 3}
