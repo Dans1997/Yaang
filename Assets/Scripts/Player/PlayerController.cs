@@ -24,6 +24,7 @@ public class PlayerController : MonoBehaviour
     AudioManager audioManager;
     Animator playerPower;
     Animator playerPowerHUD;
+    ParticleSystem powerParticles;
 
     // Start is called before the first frame update
     void Start()
@@ -35,6 +36,7 @@ public class PlayerController : MonoBehaviour
         audioManager = AudioManager.AudioManagerInstance;
         playerPower = GameObject.FindGameObjectWithTag("PlayerPower").GetComponent<Animator>();
         playerPowerHUD = GameObject.FindGameObjectWithTag("PlayerPowerHUD").GetComponent<Animator>();
+        powerParticles = playerPower.GetComponentInChildren<ParticleSystem>();
     }
 
     // Update is called once per frame
@@ -56,6 +58,7 @@ public class PlayerController : MonoBehaviour
             hasUsedPower = true;
             playerPower.SetTrigger("activateTrigger");
             playerPowerHUD.SetTrigger("activateTrigger");
+            powerParticles.Play();
             audioManager.PlaySound(AudioManager.SoundKey.PlayerPower);
         }
     }
