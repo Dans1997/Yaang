@@ -58,3 +58,6 @@ TagManager:
   - name: Player
     uniqueID: 3052490915
     locked: 0
+  - name: Player Power
+    uniqueID: 2394676359
+    locked: 0
