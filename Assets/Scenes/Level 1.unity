@@ -399,7 +399,7 @@ PrefabInstance:
     - target: {fileID: 2880661121426691574, guid: bbd9a1a112f438b4e96d280a11d48db4,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 2880661121426691574, guid: bbd9a1a112f438b4e96d280a11d48db4,
         type: 3}
@@ -445,11 +445,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Dark Cave
-      objectReference: {fileID: 0}
-    - target: {fileID: 2880661122828469459, guid: bbd9a1a112f438b4e96d280a11d48db4,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -3.1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bbd9a1a112f438b4e96d280a11d48db4, type: 3}
@@ -706,7 +701,7 @@ PrefabInstance:
     - target: {fileID: 6221005580904282249, guid: 9a7e41a71d9192946abab8f2561f434e,
         type: 3}
       propertyPath: m_Name
-      value: 0,-1.25
+      value: Finish
       objectReference: {fileID: 0}
     - target: {fileID: 6221005580904282249, guid: 9a7e41a71d9192946abab8f2561f434e,
         type: 3}
@@ -1062,7 +1057,7 @@ PrefabInstance:
     - target: {fileID: 6221005580904282249, guid: 9a7e41a71d9192946abab8f2561f434e,
         type: 3}
       propertyPath: m_Name
-      value: 0,-5.25
+      value: Start
       objectReference: {fileID: 0}
     - target: {fileID: 6221005580904282249, guid: 9a7e41a71d9192946abab8f2561f434e,
         type: 3}
