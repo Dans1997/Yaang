@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityStandardAssets.CrossPlatformInput;
 
 public class GameManager : MonoBehaviour
 {
@@ -36,7 +37,11 @@ public class GameManager : MonoBehaviour
     // Reference to all the scenes
     List<Level> levels = new List<Level>();
 
+    // State
+    bool wantsToReboot = false;
+
     // Cached Components 
+    RebootAdsScript rebootAds;
     AudioManager audioManager;
 
     private void Awake()
@@ -61,8 +66,56 @@ public class GameManager : MonoBehaviour
             levels.Add(newLevel);
         }
 
+        rebootAds = FindObjectOfType<RebootAdsScript>();
         audioManager = AudioManager.AudioManagerInstance;
     }
+
+    #region LEVEL_REBOOT_HANDLER
+
+    private void LateUpdate()
+    {
+        HandleReboot();
+    }
+
+    private void HandleReboot()
+    {
+        bool previousWantsToReboot = wantsToReboot;
+        wantsToReboot = Input.GetKey(KeyCode.R) || CrossPlatformInputManager.GetButton("Reboot");
+        if (wantsToReboot && !previousWantsToReboot)
+        {
+            StartCoroutine(RebootHandler());
+            //TODO: SET REBOOT BUTTON UP BEFORE REBOOTING
+        }
+    }
+
+    IEnumerator RebootHandler()
+    {
+        Camera mainCamera = Camera.main;
+        float currentOrthoSize = mainCamera.orthographicSize;
+
+        AudioSource rebootAudioSource = AudioManager.AudioManagerInstance.PlaySound(AudioManager.SoundKey.Reboot, transform.position);
+        for (float t = 0f; t < 3f; t += Time.deltaTime)
+        {
+            if (!wantsToReboot)
+            {
+                rebootAudioSource.Stop();
+                break;
+            }
+            mainCamera.orthographicSize -= Time.deltaTime * 0.5f;
+            yield return 0;
+        }
+        if (wantsToReboot) RebootLevel();
+        else mainCamera.orthographicSize = currentOrthoSize;
+    }
+
+    public void RebootLevel()
+    {
+        int id = SceneManager.GetActiveScene().buildIndex;
+        SetFirstVisit(id, true);
+        rebootAds.ShowRebootAd();
+    }
+
+    #endregion
 
     public bool IsFirstVisit(int id)
     {
@@ -88,13 +141,6 @@ public class GameManager : MonoBehaviour
             Debug.LogWarning("Id " + id + " is not a valid level index!");
             return;
         }
-    }
-
-    public void RebootLevel()
-    {
-        int id = SceneManager.GetActiveScene().buildIndex;
-        SetFirstVisit(id, true);
-        SceneLoader.SceneLoaderInstance.ReloadScene();
     }
 
     public void CompleteLevel()
