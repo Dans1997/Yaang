@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using UnityStandardAssets.CrossPlatformInput;
 
@@ -20,6 +21,19 @@ public class GameManager : MonoBehaviour
             }
 
             return _instance;
+        }
+    }
+
+    private void Awake()
+    {
+        if (_instance == null)
+        {
+            _instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
         }
     }
 
@@ -46,19 +60,6 @@ public class GameManager : MonoBehaviour
     RebootAdsScript rebootAds;
     AudioManager audioManager;
 
-    private void Awake()
-    {
-        if(_instance == null)
-        {
-            _instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
-    }
-
     private void Start()
     {
         for (int i = 0; i < SceneManager.sceneCountInBuildSettings; i++)
@@ -78,6 +79,8 @@ public class GameManager : MonoBehaviour
         {
             Debug.Log("Save file detected! ");
             levels = playerData.levelStatistics;
+            GameObject mainMenuCanvas = GameObject.FindGameObjectWithTag("Main Menu Canvas");
+            if (mainMenuCanvas != null) mainMenuCanvas.GetComponent<Text>().text = "Continue";
         }
     }
 

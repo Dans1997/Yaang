@@ -9,6 +9,7 @@ TagManager:
   - Exit Door
   - Player HUD
   - PlayerPowerHUD
+  - Main Menu Canvas
   layers:
   - Default
   - TransparentFX

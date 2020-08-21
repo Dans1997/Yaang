@@ -57,23 +57,22 @@ public class SceneLoader : MonoBehaviour
     // If there is a save file, load scene that is not completed yet
     public void Continue()
     {
-        int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
-
-        PlayerData playerData = SaveSystem.LoadPlayer();
-        if (playerData != null)
+        List<GameManager.Level> playerStatistics = GameManager.GameManagerInstance.GetStatistics();
+        if (playerStatistics != null)
         {
-            for (int i = 0; i < playerData.levelStatistics.Count; i++)
+            for (int i = 0; i < playerStatistics.Count; i++)
             {
                 //Debug.Log(playerData.levelStatistics[i].levelName + " " + playerData.levelStatistics[i].timesCompleted);
-                if (playerData.levelStatistics[i].timesCompleted == 0 && playerData.levelStatistics[i].levelName.Contains("Level"))
+                if (playerStatistics[i].timesCompleted == 0 && playerStatistics[i].levelName.Contains("Level"))
                 {
-                    StartCoroutine(LoadSceneByName(playerData.levelStatistics[i].levelName));
+                    StartCoroutine(LoadSceneByName(playerStatistics[i].levelName));
                     break;
                 }
             }
         }
         else
         {
+            int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
             StartCoroutine(LoadScene(currentSceneIndex + 1));
         }
     }
