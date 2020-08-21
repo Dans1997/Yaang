@@ -5,10 +5,12 @@ using UnityEngine;
 [System.Serializable]
 public class PlayerData
 {
-    //TODO: Everything we need to save here.
+    // Player's Current Level - Load From This Field
+    [HideInInspector]
+    public List<GameManager.Level> levelStatistics = new List<GameManager.Level>();
 
-    public PlayerData(PlayerController player)
+    public PlayerData()
     {
-        // Initialize everything here
+        levelStatistics = GameManager.GameManagerInstance.GetStatistics();
     }
 }

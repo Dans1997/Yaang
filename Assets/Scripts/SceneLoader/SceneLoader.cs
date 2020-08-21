@@ -54,12 +54,44 @@ public class SceneLoader : MonoBehaviour
         StartCoroutine(LoadScene(0));
     }
 
+    // If there is a save file, load scene that is not completed yet
+    public void Continue()
+    {
+        int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
+
+        PlayerData playerData = SaveSystem.LoadPlayer();
+        if (playerData != null)
+        {
+            for (int i = 0; i < playerData.levelStatistics.Count; i++)
+            {
+                //Debug.Log(playerData.levelStatistics[i].levelName + " " + playerData.levelStatistics[i].timesCompleted);
+                if (playerData.levelStatistics[i].timesCompleted == 0 && playerData.levelStatistics[i].levelName.Contains("Level"))
+                {
+                    StartCoroutine(LoadSceneByName(playerData.levelStatistics[i].levelName));
+                    break;
+                }
+            }
+        }
+        else
+        {
+            StartCoroutine(LoadScene(currentSceneIndex + 1));
+        }
+    }
+
     IEnumerator LoadScene(int buildIndex)
     {
         transitionAnimator.SetTrigger("loadLevel");
         AudioManager.AudioManagerInstance.PlaySound(AudioManager.SoundKey.Transition);
         yield return new WaitForSeconds(1f);
         SceneManager.LoadScene(buildIndex);
+    }
+
+    IEnumerator LoadSceneByName(string sceneName)
+    {
+        transitionAnimator.SetTrigger("loadLevel");
+        AudioManager.AudioManagerInstance.PlaySound(AudioManager.SoundKey.Transition);
+        yield return new WaitForSeconds(1f);
+        SceneManager.LoadScene(sceneName);
     }
 
     public void Quit()

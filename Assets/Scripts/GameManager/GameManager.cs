@@ -25,9 +25,11 @@ public class GameManager : MonoBehaviour
 
     #endregion Singleton
 
+    [System.Serializable]
     public class Level
     {
         public int levelId = 0; //buildIndex
+        public string levelName = "";
         public int timesCompleted = 0;
         public int timesFailed = 0;
 
@@ -63,11 +65,20 @@ public class GameManager : MonoBehaviour
         {
             Level newLevel = new Level();
             newLevel.levelId = i;
+            newLevel.levelName = SceneUtility.GetScenePathByBuildIndex(i).Replace("Assets/Scenes/", "").Replace(".unity", "");
             levels.Add(newLevel);
         }
 
         rebootAds = FindObjectOfType<RebootAdsScript>();
         audioManager = AudioManager.AudioManagerInstance;
+
+        // Get Saved File
+        PlayerData playerData = SaveSystem.LoadPlayer();
+        if(playerData != null)
+        {
+            Debug.Log("Save file detected! ");
+            levels = playerData.levelStatistics;
+        }
     }
 
     #region LEVEL_REBOOT_HANDLER
@@ -117,6 +128,8 @@ public class GameManager : MonoBehaviour
 
     #endregion
 
+    public List<Level> GetStatistics() => levels;
+
     public bool IsFirstVisit(int id)
     {
         if(levels[id] != null)
@@ -149,6 +162,7 @@ public class GameManager : MonoBehaviour
         if (levels[id] != null)
         {
             levels[id].timesCompleted++;
+            SaveSystem.SavePlayer();
             StartCoroutine(CompletionCutscene());
         }
         else

@@ -606,6 +606,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: Dark Cave
       objectReference: {fileID: 0}
+    - target: {fileID: 2880661122828469459, guid: bbd9a1a112f438b4e96d280a11d48db4,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.4000001
+      objectReference: {fileID: 0}
+    - target: {fileID: 2880661122828469459, guid: bbd9a1a112f438b4e96d280a11d48db4,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 6.3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bbd9a1a112f438b4e96d280a11d48db4, type: 3}
 --- !u!1001 &1797429498
