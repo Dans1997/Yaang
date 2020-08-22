@@ -7,6 +7,7 @@ public class FireTile : TilePath
 {
     // Fire Tile -> Ouch, so much for cold feet.
 
+    // Cached Components
     ParticleSystem fireTileVFX;
 
     private void Start()
@@ -20,6 +21,11 @@ public class FireTile : TilePath
         fireTileVFX.Play();   
         AudioManager.AudioManagerInstance.PlaySound(AudioManager.SoundKey.FireTileLightUp1, player.transform.position);
         StartCoroutine(player.KillPlayer());
+    }
+
+    public override bool WasVisited()
+    {
+        return true;
     }
 
     public override void PlayTurnOnSound()

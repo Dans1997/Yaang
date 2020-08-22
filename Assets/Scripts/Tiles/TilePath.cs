@@ -22,7 +22,7 @@ public abstract class TilePath : MonoBehaviour
         TurnOff();
     }
 
-    public bool WasVisited() => wasVisited;
+    public virtual bool WasVisited() => wasVisited;
 
     public void SetVisit(bool visited) => wasVisited = visited;
 
