@@ -19,7 +19,7 @@ public class PlayerPower : MonoBehaviour
             {
                 if (++tilesLit <= maxTiles)
                 {
-                    StartCoroutine(tilePath.LightUpTemporarily());
+                    StartCoroutine(tilePath.LightUpTemporarily(0f));
                 }
             }
 

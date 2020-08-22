@@ -27,6 +27,13 @@ public class PlayerController : MonoBehaviour
 
     public Vector2 GetMoveUnits() => new Vector2(moveUnitX, moveUnitY);
 
+    public void SetWinState()
+    {
+        playerAnimation.SetMoveDirection(new Vector2(0, 0));
+        playerAnimation.SetIdle(true);
+        this.enabled = false;
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -171,32 +178,11 @@ public class PlayerController : MonoBehaviour
         transform.position = pos2;
 
         // Check if the tile is valid or not
-        CheckPlayerPosition();
+        PathManager.PathManagerInstance.CheckPlayerPosition();
         isIdle = true;
     }
 
-    private void CheckPlayerPosition()
-    {
-        if (pathManager.IsTileValid(transform.position))
-        {
-            if (pathManager.IsDestination(transform.position))
-            {
-                if(pathManager.AreAllTilesLitUp())
-                {
-                    playerAnimation.SetMoveDirection(new Vector2(0, 0));
-                    playerAnimation.SetIdle(true);
-                    this.enabled = false;
-                    GameManager.GameManagerInstance.CompleteLevel();
-                }
-            }
-        }
-        else
-        {
-            StartCoroutine(KillPlayer());
-        }
-    }
-
-    IEnumerator KillPlayer()
+    public IEnumerator KillPlayer()
     {
         audioManager.PlaySound(AudioManager.SoundKey.PlayerDeath);
         playerAnimation.SetDeath();

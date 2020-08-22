@@ -70,7 +70,7 @@ public class PathManager : MonoBehaviour
             player.transform.position = new Vector3(startTilePos.x, startTilePos.y, player.transform.position.z);
             cameraFollow.transform.position = new Vector3(startTilePos.x, startTilePos.y, cameraFollow.transform.position.z);
             cameraFollow.SetFollowObject(player.gameObject);
-            path[0].LightUp(); // Ligth Up First Tile
+            path[0].TurnOn(); // Light Up First Tile
             path[0].SetVisit(true);
         }
     }
@@ -97,7 +97,6 @@ public class PathManager : MonoBehaviour
         playerAnimation.PlayAnimation("Idle");
         playerPos.position = startTilePos;
 
-        IsTileValid(player.transform.position);
         yield return new WaitForSeconds(0.7f); // 70% of Tile Light Up Animation Duration
 
         // Light Up All Tile Paths
@@ -105,12 +104,13 @@ public class PathManager : MonoBehaviour
         {
             StartCoroutine(cameraFollow.LerpFromTo(cameraFollow.transform.position, tile.transform.position, lightTileTime));
             yield return new WaitUntil(() => new Vector2(cameraFollow.transform.position.x, cameraFollow.transform.position.y) == new Vector2(tile.transform.position.x, tile.transform.position.y));
-            tile.LightUp();
+            tile.TurnOn();
+            tile.PlayTurnOnSound();
             yield return new WaitForSeconds(0.7f); // 70% of Tile Light Up Animation Duration
         }
 
         // Turn Off All Tiles
-        gameObject.BroadcastMessage("TurnOff");
+        gameObject.BroadcastMessage("ResetTile");
         audioManager.PlaySound(AudioManager.SoundKey.TileLightDown1);
         yield return new WaitForSeconds(1.3f);
 
@@ -129,24 +129,33 @@ public class PathManager : MonoBehaviour
         playerHUD.enabled = true;
     }
 
-    public bool IsTileValid(Vector3 position)
+    public void CheckPlayerPosition()
     {
+        Vector3 position = player.transform.position;
         TilePath tile = System.Array.Find(path, t => t.transform.position == position);
-        if(tile != null)
+        if (tile != null)
         {
-            tile.LightUp();
-            tile.SetVisit(true);
-            return true;
+            // Change this to fit different events when the player steps on a certain tile.
+            tile.OnVisit(player);
+            if (new Vector2(position.x, position.y) == new Vector2(finishTilePos.x, finishTilePos.y))
+            {
+                if (AreAllTilesVisited())
+                {
+                    player.SetWinState();
+                    GameManager.GameManagerInstance.CompleteLevel();
+                }
+            }
         }
         else
         {
-            return false;
+            // No tile found! Kill player and restart level
+            StartCoroutine(player.KillPlayer());
         }
     }
 
-    public bool IsDestination(Vector3 position) => new Vector2(position.x, position.y) == new Vector2(finishTilePos.x, finishTilePos.y);
+    public bool DoesTileExistInPosition(Vector3 position) => System.Array.Find(path, t => t.transform.position == position) != null;
 
-    public bool AreAllTilesLitUp()
+    public bool AreAllTilesVisited()
     {
         if (!requiresAllTiles) return true;
         foreach (TilePath tile in path)
