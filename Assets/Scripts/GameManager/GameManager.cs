@@ -78,7 +78,10 @@ public class GameManager : MonoBehaviour
         if(playerData != null)
         {
             Debug.Log("Save file detected! ");
-            levels = playerData.levelStatistics;
+            foreach(Level level in playerData.levelStatistics)
+            {
+                levels[level.levelId] = playerData.levelStatistics[level.levelId];
+            }
             GameObject mainMenuCanvas = GameObject.FindGameObjectWithTag("Main Menu Canvas");
             if (mainMenuCanvas != null) mainMenuCanvas.GetComponent<Text>().text = "Continue";
         }
