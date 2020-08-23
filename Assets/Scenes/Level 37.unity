@@ -4249,16 +4249,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Phantom Cave
       objectReference: {fileID: 0}
-    - target: {fileID: 4579419663347120165, guid: 146a78e1ecbe44f478ce1b5a95e4df7d,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 1.8499997
-      objectReference: {fileID: 0}
-    - target: {fileID: 4579419663347120165, guid: 146a78e1ecbe44f478ce1b5a95e4df7d,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 4
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 146a78e1ecbe44f478ce1b5a95e4df7d, type: 3}
 --- !u!1001 &6221005581589507061
