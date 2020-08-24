@@ -7,8 +7,12 @@ public class FireTile : TilePath
 {
     // Fire Tile -> Ouch, so much for cold feet.
 
+    // State
+    float scorchDelay = 2f;
+
     // Cached Components
     ParticleSystem fireTileVFX;
+    Coroutine scorchCoroutine;
 
     private void Start()
     {
@@ -17,15 +21,37 @@ public class FireTile : TilePath
 
     public override void OnVisit(PlayerController player)
     {
-        Debug.Log("You just got scorched.");
-        fireTileVFX.Play();   
-        AudioManager.AudioManagerInstance.PlaySound(AudioManager.SoundKey.FireTileLightUp1, player.transform.position);
-        StartCoroutine(player.KillPlayer());
+        bool previousWasVisited = wasVisited;
+        wasVisited = true;
+
+        if (!previousWasVisited)
+        {
+            TurnOn();
+        }
+
+        if (scorchCoroutine != null) StopCoroutine(scorchCoroutine);
+        scorchCoroutine = StartCoroutine(ScorchPlayer(player));
     }
 
-    public override bool WasVisited()
+    IEnumerator ScorchPlayer(PlayerController player)
     {
-        return true;
+        AudioSource fireTileWarmUp = AudioManager.AudioManagerInstance.PlaySound(AudioManager.SoundKey.FireTileWarmUp, player.transform.position);
+        for (float t = 0f; t < scorchDelay; t += Time.deltaTime)
+        {
+            if (transform.position != player.transform.position)
+            {
+                StopCoroutine(scorchCoroutine);
+                fireTileWarmUp.Stop();
+            }
+            yield return 0;
+        }
+        if (transform.position == player.transform.position)
+        {
+            Debug.Log("You just got scorched.");
+            fireTileVFX.Play();
+            AudioManager.AudioManagerInstance.PlaySound(AudioManager.SoundKey.FireTileLightUp1, player.transform.position);
+            StartCoroutine(player.KillPlayer());
+        }
     }
 
     public override void PlayTurnOnSound()

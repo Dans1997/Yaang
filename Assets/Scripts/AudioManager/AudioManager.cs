@@ -40,6 +40,7 @@ public class AudioManager : MonoBehaviour
         TileLightUp3,
         TileLightUp4,
 
+        FireTileWarmUp,
         FireTileLightUp1,
 
         TileLightDown1,

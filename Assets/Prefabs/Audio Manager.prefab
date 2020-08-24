@@ -133,7 +133,7 @@ MonoBehaviour:
     spatialBlend: 0
     loop: 0
   - audioSource: {fileID: 0}
-    soundKey: 14
+    soundKey: 15
     clip: {fileID: 8300000, guid: fb3dbafea2181124ca87001c0e8d0b64, type: 3}
     delay: 0
     volume: 0.4
@@ -142,14 +142,14 @@ MonoBehaviour:
     loop: 0
   - audioSource: {fileID: 0}
     soundKey: 11
-    clip: {fileID: 8300000, guid: 9afe394d88e34a34fbb8b112cdb0224c, type: 3}
+    clip: {fileID: 8300000, guid: 2e3628c25486a9d4a87bc4f497b786df, type: 3}
     delay: 0
     volume: 0.7
     pitch: 1
     spatialBlend: 0
     loop: 0
   - audioSource: {fileID: 0}
-    soundKey: 13
+    soundKey: 14
     clip: {fileID: 8300000, guid: bd122e95e1ef46a4d8c73b55ecd8ac7e, type: 3}
     delay: 0.2
     volume: 1
@@ -157,10 +157,18 @@ MonoBehaviour:
     spatialBlend: 0
     loop: 0
   - audioSource: {fileID: 0}
-    soundKey: 12
+    soundKey: 13
     clip: {fileID: 8300000, guid: 032d71653bdcac74bba3d1e1b2a1db2e, type: 3}
     delay: 0
     volume: 1
+    pitch: 1
+    spatialBlend: 0
+    loop: 0
+  - audioSource: {fileID: 0}
+    soundKey: 12
+    clip: {fileID: 8300000, guid: 9afe394d88e34a34fbb8b112cdb0224c, type: 3}
+    delay: 0
+    volume: 0.7
     pitch: 1
     spatialBlend: 0
     loop: 0
