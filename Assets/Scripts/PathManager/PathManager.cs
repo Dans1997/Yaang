@@ -31,6 +31,7 @@ public class PathManager : MonoBehaviour
 
     [SerializeField] float lightTileTime = 0f;
     [SerializeField] bool requiresAllTiles = false;
+    [SerializeField] bool overallView = false;
 
     // State
     Vector3 startTilePos;
@@ -81,9 +82,14 @@ public class PathManager : MonoBehaviour
         playerHUD.enabled = false;
         yield return new WaitForSeconds(0.7f); // 70% of Transition Duration
 
+        // Components Needed For the Start Cutscene
         Camera mainCamera = cameraFollow.GetComponent<Camera>();
         Transform playerPos = player.transform;
         PlayerAnimation playerAnimation = player.GetComponentInChildren<PlayerAnimation>();
+
+        // Camera Zoom Related Variables
+        float startCameraSize = mainCamera.orthographicSize;
+        float targetCameraSize = 5f; // Covers all tiles from left to right
 
         // Move Player to First Tile Path
         playerAnimation.PlayAnimation("Move_Up_Loop");
@@ -99,14 +105,37 @@ public class PathManager : MonoBehaviour
 
         yield return new WaitForSeconds(0.7f); // 70% of Tile Light Up Animation Duration
 
-        // Light Up All Tile Paths
-        foreach (TilePath tile in path)
+
+        if(overallView)
         {
-            StartCoroutine(cameraFollow.LerpFromTo(cameraFollow.transform.position, tile.transform.position, lightTileTime));
-            yield return new WaitUntil(() => new Vector2(cameraFollow.transform.position.x, cameraFollow.transform.position.y) == new Vector2(tile.transform.position.x, tile.transform.position.y));
-            tile.TurnOn();
-            tile.PlayTurnOnSound();
-            yield return new WaitForSeconds(0.7f); // 70% of Tile Light Up Animation Duration
+            // Zoom Camera Out          
+            while (mainCamera.orthographicSize < targetCameraSize)
+            {
+                mainCamera.orthographicSize = Mathf.MoveTowards(mainCamera.orthographicSize, targetCameraSize, Time.deltaTime);
+                yield return 0;
+            }
+            mainCamera.orthographicSize = targetCameraSize;
+
+            StartCoroutine(cameraFollow.LerpFromTo(cameraFollow.transform.position, exitDoorPos, 11f));
+            foreach (TilePath tile in path)
+            {        
+                tile.TurnOn();
+                tile.PlayTurnOnSound();
+                yield return new WaitForSeconds(0.2f);
+            }
+            yield return new WaitUntil(() => new Vector2(cameraFollow.transform.position.x, cameraFollow.transform.position.y) == new Vector2(exitDoorPos.x, exitDoorPos.y));
+        }
+        else
+        {
+            // Light Up All Tile Paths
+            foreach (TilePath tile in path)
+            {
+                StartCoroutine(cameraFollow.LerpFromTo(cameraFollow.transform.position, tile.transform.position, lightTileTime));
+                yield return new WaitUntil(() => new Vector2(cameraFollow.transform.position.x, cameraFollow.transform.position.y) == new Vector2(tile.transform.position.x, tile.transform.position.y));
+                tile.TurnOn();
+                tile.PlayTurnOnSound();
+                yield return new WaitForSeconds(0.7f); // 70% of Tile Light Up Animation Duration
+            }
         }
 
         // Turn Off All Tiles
@@ -116,14 +145,24 @@ public class PathManager : MonoBehaviour
 
         // Show Exit Door
         StartCoroutine(cameraFollow.LerpFromTo(cameraFollow.transform.position, exitDoorPos, 2f));
+
+        // Zoom Camera In If Necessary
+        while (mainCamera.orthographicSize != startCameraSize)
+        {
+            mainCamera.orthographicSize = Mathf.MoveTowards(mainCamera.orthographicSize, startCameraSize, Time.deltaTime);
+            yield return 0;
+        }
+        mainCamera.orthographicSize = startCameraSize;
+
         yield return new WaitUntil(() => new Vector2(cameraFollow.transform.position.x, cameraFollow.transform.position.y) == new Vector2(exitDoorPos.x, exitDoorPos.y));
         yield return new WaitForSeconds(2f); // Time to show Exit Door
 
         // Go to Player Position
-        cameraFollow.SetFollowObject(player.gameObject);
         cameraFollow.SetMoveSpeed(12f);
+        cameraFollow.SetFollowObject(player.gameObject);
         yield return new WaitUntil(() => new Vector2(cameraFollow.transform.position.x, cameraFollow.transform.position.y) == new Vector2(player.transform.position.x, player.transform.position.y));
 
+        // Enable Player Control
         cameraFollow.SetMoveSpeed(3f);
         player.enabled = true;
         playerHUD.enabled = true;
