@@ -29,9 +29,15 @@ public class PathManager : MonoBehaviour
 
     #endregion Singleton
 
+    [Header("Default View Camera")]
     [SerializeField] float lightTileTime = 0f;
     [SerializeField] bool requiresAllTiles = false;
+
+    [Space]
+    [Header("Overall View Camera")]
     [SerializeField] bool overallView = false;
+    [SerializeField] float overallCameraTime = 11f;
+    [SerializeField] float overallCameraTileTime = 0.25f;
 
     // State
     Vector3 startTilePos;
@@ -116,12 +122,13 @@ public class PathManager : MonoBehaviour
             }
             mainCamera.orthographicSize = targetCameraSize;
 
-            StartCoroutine(cameraFollow.LerpFromTo(cameraFollow.transform.position, exitDoorPos, 11f));
+            // Move Camera to The Exit Door
+            StartCoroutine(cameraFollow.LerpFromTo(cameraFollow.transform.position, exitDoorPos, overallCameraTime));
             foreach (TilePath tile in path)
             {        
                 tile.TurnOn();
                 tile.PlayTurnOnSound();
-                yield return new WaitForSeconds(0.2f);
+                yield return new WaitForSeconds(overallCameraTileTime);
             }
             yield return new WaitUntil(() => new Vector2(cameraFollow.transform.position.x, cameraFollow.transform.position.y) == new Vector2(exitDoorPos.x, exitDoorPos.y));
         }

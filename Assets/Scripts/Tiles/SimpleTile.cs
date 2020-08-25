@@ -6,6 +6,8 @@ public class SimpleTile : TilePath
 {
     // Simple Tile -> When Stepped On, lights up and plays a random sound
 
+    public override string GetName() => "Simple Tile";
+
     public override void OnVisit(PlayerController player)
     {
         if (wasVisited) return;

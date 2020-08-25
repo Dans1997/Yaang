@@ -17,7 +17,14 @@ public class FireTile : TilePath
     private void Start()
     {
         fireTileVFX = GetComponent<ParticleSystem>();
+        if (fireTileVFX)
+        {
+            ParticleSystem.MainModule mainModule = fireTileVFX.main;
+            mainModule.simulationSpeed = 1f;
+        }
     }
+
+    public override string GetName() => "Fire Tile";
 
     public override void OnVisit(PlayerController player)
     {

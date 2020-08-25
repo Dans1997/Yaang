@@ -7,6 +7,8 @@ public abstract class TilePath : MonoBehaviour
     // State
     protected bool wasVisited = false;
 
+    public abstract string GetName();
+
     public abstract void OnVisit(PlayerController player);
 
     public abstract void PlayTurnOnSound();

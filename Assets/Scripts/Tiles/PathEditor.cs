@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 [ExecuteInEditMode]
 [SelectionBase]
@@ -9,6 +7,7 @@ public class PathEditor : MonoBehaviour
 {
     // Cached Components
     PlayerController player;
+    TilePath tilePath;
 
     // State
     float moveUnitX = 0f;
@@ -16,21 +15,30 @@ public class PathEditor : MonoBehaviour
     private void Awake()
     {
         player = FindObjectOfType<PlayerController>();
+        tilePath = GetComponent<TilePath>();
+        ParticleSystem particleSystem = GetComponent<ParticleSystem>();
+
+        if (particleSystem)
+        {
+            ParticleSystem.MainModule particles = particleSystem.main;
+            particles.simulationSpeed = 0f;
+        }
+
         Vector2 playerMoveUnits = player.GetMoveUnits();
         moveUnitX = playerMoveUnits.x;
+
+        RenameGameObject();
     }
 
     // Update is called once per frame
     void Update()
     {
         SnapToPosition();
-        RenameGameObjectAndLabel();
     }
 
-    private void RenameGameObjectAndLabel()
+    private void RenameGameObject()
     {
-        string labelText = $"{transform.position.x},{transform.position.y}";
-        gameObject.name = labelText;
+        gameObject.name = $"{tilePath.GetName()}";
         if (gameObject.tag == "Start") gameObject.name = "Start";
         if (gameObject.tag == "Finish") gameObject.name = "Finish";
     }
