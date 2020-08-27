@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: LightDown
+  m_Name: Fire_Unlit
   serializedVersion: 6
   m_Legacy: 0
   m_Compressed: 0
@@ -22,22 +22,13 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 2.5
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 136
-        weightedMode: 0
-        inWeight: 0.33333334
-        outWeight: 0.33333334
-      - serializedVersion: 3
-        time: 1
         value: 0
         inSlope: 0
         outSlope: 0
         tangentMode: 136
         weightedMode: 0
-        inWeight: 0.33333334
-        outWeight: 0.33333334
+        inWeight: 0
+        outWeight: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
@@ -47,17 +38,8 @@ AnimationClip:
     script: {fileID: 11500000, guid: 073797afb82c5a1438f328866b10b3f0, type: 3}
   m_PPtrCurves:
   - curve:
-    - time: 0.21666667
-      value: {fileID: 6152532013045154667, guid: a5333396092649241b052998fc2a4da1,
-        type: 3}
-    - time: 0.26666668
-      value: {fileID: 8289671871381138257, guid: a5333396092649241b052998fc2a4da1,
-        type: 3}
-    - time: 0.31666666
-      value: {fileID: -4773310055213535079, guid: a5333396092649241b052998fc2a4da1,
-        type: 3}
-    - time: 0.36666667
-      value: {fileID: 1325028264418417928, guid: a5333396092649241b052998fc2a4da1,
+    - time: 0
+      value: {fileID: 7761349247818428544, guid: 13bcfaad0491f904aac559f4e4e3a1d8,
         type: 3}
     attribute: m_Sprite
     path: 
@@ -71,30 +53,27 @@ AnimationClip:
   m_ClipBindingConstant:
     genericBindings:
     - serializedVersion: 2
-      path: 2945962171
-      attribute: 898800009
-      script: {fileID: 11500000, guid: 073797afb82c5a1438f328866b10b3f0, type: 3}
-      typeID: 114
-      customType: 0
-      isPPtrCurve: 0
-    - serializedVersion: 2
       path: 0
       attribute: 0
       script: {fileID: 0}
       typeID: 212
       customType: 23
       isPPtrCurve: 1
+    - serializedVersion: 2
+      path: 2945962171
+      attribute: 898800009
+      script: {fileID: 11500000, guid: 073797afb82c5a1438f328866b10b3f0, type: 3}
+      typeID: 114
+      customType: 0
+      isPPtrCurve: 0
     pptrCurveMapping:
-    - {fileID: 6152532013045154667, guid: a5333396092649241b052998fc2a4da1, type: 3}
-    - {fileID: 8289671871381138257, guid: a5333396092649241b052998fc2a4da1, type: 3}
-    - {fileID: -4773310055213535079, guid: a5333396092649241b052998fc2a4da1, type: 3}
-    - {fileID: 1325028264418417928, guid: a5333396092649241b052998fc2a4da1, type: 3}
+    - {fileID: 7761349247818428544, guid: 13bcfaad0491f904aac559f4e4e3a1d8, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 1
+    m_StopTime: 0.016666668
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
@@ -115,22 +94,13 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 2.5
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 136
-        weightedMode: 0
-        inWeight: 0.33333334
-        outWeight: 0.33333334
-      - serializedVersion: 3
-        time: 1
         value: 0
         inSlope: 0
         outSlope: 0
         tangentMode: 136
         weightedMode: 0
-        inWeight: 0.33333334
-        outWeight: 0.33333334
+        inWeight: 0
+        outWeight: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
