@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: LightDown
+  m_Name: Fire_Lit
   serializedVersion: 6
   m_Legacy: 0
   m_Compressed: 0
@@ -22,6 +22,15 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
+        value: 2
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 0.5
         value: 2.5
         inSlope: 0
         outSlope: 0
@@ -31,7 +40,7 @@ AnimationClip:
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 1
-        value: 0
+        value: 2
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -47,17 +56,8 @@ AnimationClip:
     script: {fileID: 11500000, guid: 073797afb82c5a1438f328866b10b3f0, type: 3}
   m_PPtrCurves:
   - curve:
-    - time: 0.21666667
-      value: {fileID: 6152532013045154667, guid: a5333396092649241b052998fc2a4da1,
-        type: 3}
-    - time: 0.26666668
-      value: {fileID: 8289671871381138257, guid: a5333396092649241b052998fc2a4da1,
-        type: 3}
-    - time: 0.31666666
-      value: {fileID: -4773310055213535079, guid: a5333396092649241b052998fc2a4da1,
-        type: 3}
-    - time: 0.36666667
-      value: {fileID: 1325028264418417928, guid: a5333396092649241b052998fc2a4da1,
+    - time: 0
+      value: {fileID: 6275036929673579434, guid: 13bcfaad0491f904aac559f4e4e3a1d8,
         type: 3}
     attribute: m_Sprite
     path: 
@@ -85,10 +85,7 @@ AnimationClip:
       customType: 23
       isPPtrCurve: 1
     pptrCurveMapping:
-    - {fileID: 6152532013045154667, guid: a5333396092649241b052998fc2a4da1, type: 3}
-    - {fileID: 8289671871381138257, guid: a5333396092649241b052998fc2a4da1, type: 3}
-    - {fileID: -4773310055213535079, guid: a5333396092649241b052998fc2a4da1, type: 3}
-    - {fileID: 1325028264418417928, guid: a5333396092649241b052998fc2a4da1, type: 3}
+    - {fileID: 6275036929673579434, guid: 13bcfaad0491f904aac559f4e4e3a1d8, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}
@@ -115,6 +112,15 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
+        value: 2
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 0.5
         value: 2.5
         inSlope: 0
         outSlope: 0
@@ -124,7 +130,7 @@ AnimationClip:
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 1
-        value: 0
+        value: 2
         inSlope: 0
         outSlope: 0
         tangentMode: 136
