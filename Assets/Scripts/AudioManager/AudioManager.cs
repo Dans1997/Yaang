@@ -47,7 +47,10 @@ public class AudioManager : MonoBehaviour
 
         Footstep,
 
-        Reboot
+        Reboot,
+
+        CyberTile1,
+        CyberTileZap1,
     }
 
     [System.Serializable]
@@ -157,6 +160,7 @@ public class AudioManager : MonoBehaviour
                 audioSource.pitch = sound.pitch;
                 audioSource.spatialBlend = sound.spatialBlend;
                 audioSource.loop = sound.loop;
+                audioSource.dopplerLevel = 0f;
 
                 if (sound.loop)
                 {
