@@ -9,7 +9,8 @@ public class CyberTile : TilePath
 
     // State
     bool zapped = false;
-    float zapDelay = 2f;
+    float zapCooldown = 2f;
+    [SerializeField] [Range(0f, 10f)] float zapDelay = 0f;
 
     // Cached Components
     PlayerController playerController;
@@ -26,8 +27,6 @@ public class CyberTile : TilePath
 
     public override string GetName() => "Cyber Tile";
 
-    public override bool WasVisited() => true;
-
     public override void OnVisit(PlayerController player)
     {
         bool previousWasVisited = wasVisited;
@@ -42,9 +41,10 @@ public class CyberTile : TilePath
 
     IEnumerator ZapLoop()
     {
-        while(true)
+        yield return new WaitForSeconds(zapDelay);
+        while (true)
         {
-            yield return new WaitForSeconds(zapDelay);
+            yield return new WaitForSeconds(zapCooldown);
             zapTileVFX.Play();
             AudioManager.AudioManagerInstance.PlaySound(AudioManager.SoundKey.CyberTileZap1, transform.position);
             yield return new WaitForSeconds(mainModule.duration);

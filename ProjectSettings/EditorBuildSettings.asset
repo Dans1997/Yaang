@@ -222,6 +222,36 @@ EditorBuildSettings:
     path: Assets/Scenes/Level 70.unity
     guid: 17df4c12da2337d42a72e90c06d6265c
   - enabled: 1
+    path: Assets/Scenes/Level 71.unity
+    guid: 7c78b53e499ce8342833484e5d863117
+  - enabled: 1
+    path: Assets/Scenes/Level 72.unity
+    guid: ca8c2a3996573814781c5d482261b096
+  - enabled: 1
+    path: Assets/Scenes/Level 73.unity
+    guid: c9c598dbe66c07d40a35c9e94f847d6a
+  - enabled: 1
+    path: Assets/Scenes/Level 74.unity
+    guid: f46a318ca854e9e4b903915b50a91666
+  - enabled: 1
+    path: Assets/Scenes/Level 75.unity
+    guid: 92eaab43befa16d40a26634c9a74eb03
+  - enabled: 1
+    path: Assets/Scenes/Level 76.unity
+    guid: 9415d87c0f683ba4681e092f6be83017
+  - enabled: 1
+    path: Assets/Scenes/Level 77.unity
+    guid: fc86d390f7e7cbd45bf0d8e912802599
+  - enabled: 1
+    path: Assets/Scenes/Level 78.unity
+    guid: 3ea609412004af447b23fa188f34c4e8
+  - enabled: 1
+    path: Assets/Scenes/Level 79.unity
+    guid: 917029ca3ed3fad4a8a6f1d9feb68c36
+  - enabled: 1
+    path: Assets/Scenes/Level 80.unity
+    guid: 4373005cf7b9f99449d1c473e6bcf00e
+  - enabled: 1
     path: Assets/Scenes/X. End.unity
     guid: 6cb7d63c1b7edb046a9099501e656a27
   m_configObjects: {}

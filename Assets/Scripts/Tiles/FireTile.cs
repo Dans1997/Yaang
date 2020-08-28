@@ -8,7 +8,7 @@ public class FireTile : TilePath
     // Fire Tile -> Ouch, so much for cold feet.
 
     // State
-    float scorchDelay = 2f;
+    float scorchDelay = 1.5f;
 
     // Cached Components
     ParticleSystem fireTileVFX;

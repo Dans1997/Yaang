@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class PathManager : MonoBehaviour
 {
@@ -42,11 +43,13 @@ public class PathManager : MonoBehaviour
     // State
     Vector3 startTilePos;
     Vector3 finishTilePos;
-    Vector3 exitDoorPos; 
+    Vector3 exitDoorPos;
+    int visitedTiles = 1;
 
     // Cached Components
     PlayerController player;
     Canvas playerHUD;
+    Text tileCountText;
     CameraFollow cameraFollow;
     AudioManager audioManager;
     TilePath[] path;
@@ -61,6 +64,7 @@ public class PathManager : MonoBehaviour
         path = GetComponentsInChildren<TilePath>();
         player = FindObjectOfType<PlayerController>();
         playerHUD = GameObject.FindGameObjectWithTag("Player HUD").GetComponent<Canvas>();
+        tileCountText = GameObject.FindGameObjectWithTag("TileCountUI").GetComponent<Text>();
         cameraFollow = FindObjectOfType<CameraFollow>();
         audioManager = AudioManager.AudioManagerInstance;
 
@@ -80,6 +84,9 @@ public class PathManager : MonoBehaviour
             path[0].TurnOn(); // Light Up First Tile
             path[0].SetVisit(true);
         }
+
+        // Update Tile Count Text
+        tileCountText.text = $"{visitedTiles}/{path.Length}";
     }
 
     IEnumerator StartLevel()
@@ -181,7 +188,7 @@ public class PathManager : MonoBehaviour
         TilePath tile = System.Array.Find(path, t => t.transform.position == position);
         if (tile != null)
         {
-            // Change this to fit different events when the player steps on a certain tile.
+            if (!tile.WasVisited()) tileCountText.text = $"{++visitedTiles}/{path.Length}";
             tile.OnVisit(player);
             if (new Vector2(position.x, position.y) == new Vector2(finishTilePos.x, finishTilePos.y))
             {
@@ -204,10 +211,7 @@ public class PathManager : MonoBehaviour
     public bool AreAllTilesVisited()
     {
         if (!requiresAllTiles) return true;
-        foreach (TilePath tile in path)
-        {
-            if (!tile.WasVisited()) return false;
-        }
-        return true;
+        if (visitedTiles > path.Length) Debug.LogWarning("Error in path count logic.");
+        return visitedTiles == path.Length;
     }
 }
