@@ -78,6 +78,10 @@ public class AudioManager : MonoBehaviour
     GameObject oneShotObj;
     AudioSource oneShotAudioSource;
 
+    // Pooling System
+    int queueCount = 15;
+    Queue<AudioSource> audioObjectsQueue3D = new Queue<AudioSource>();
+
     private void Awake()
     {
         if (_instance == null)
@@ -92,15 +96,31 @@ public class AudioManager : MonoBehaviour
         }
 
         SetUpSounds();
-
-        // Main Theme
-        PlaySound(SoundKey.MainTheme, transform.position);
-        // Transition Sound
-        PlaySound(SoundKey.Transition);
     }
 
     private void SetUpSounds()
     {
+        // Set Up One Shot Audio Source
+        if (oneShotObj == null)
+        {
+            oneShotObj = new GameObject("Audio Manager One Shot Object");
+            oneShotObj.transform.parent = transform;
+            oneShotAudioSource = oneShotObj.AddComponent<AudioSource>();
+        }
+
+        // Set 3D AudioSources Queue
+        while(audioObjectsQueue3D.Count < queueCount)
+        {
+            GameObject soundGameObject = new GameObject("Audio Manager 3D Object");
+            soundGameObject.transform.position = transform.position;
+            soundGameObject.transform.parent = transform;
+            AudioSource audioSource = soundGameObject.AddComponent<AudioSource>();
+            soundGameObject.SetActive(false);
+
+            audioObjectsQueue3D.Enqueue(audioSource);
+        }
+
+
         foreach (Sound sound in gameSounds)
         {
             if (sound.delay > 0f)
@@ -108,6 +128,12 @@ public class AudioManager : MonoBehaviour
                 soundTimerDictionary[sound.soundKey] = 0f;
             }
         }
+
+        // Main Theme
+        PlaySound(SoundKey.MainTheme, transform.position);
+
+        // Transition Sound
+        PlaySound(SoundKey.Transition);
     }
 
     public void PlaySelectButton() => PlaySound(SoundKey.Button);
@@ -122,9 +148,8 @@ public class AudioManager : MonoBehaviour
             {
                 if (oneShotObj == null)
                 {
-                    oneShotObj = new GameObject("Audio Manager One Shot Object");
-                    oneShotObj.transform.parent = transform;
-                    oneShotAudioSource = oneShotObj.AddComponent<AudioSource>();
+                    Debug.LogWarning("One Shot Audio Object is Null! Returning...");
+                    return;
                 }
 
                 // Audio Source Config
@@ -149,10 +174,14 @@ public class AudioManager : MonoBehaviour
         {
             if (CanPlaySound(sound))
             {
-                GameObject soundGameObject = new GameObject("Audio Manager 3D Object");
-                soundGameObject.transform.position = position;
-                soundGameObject.transform.parent = transform;
-                AudioSource audioSource = soundGameObject.AddComponent<AudioSource>();
+                if(audioObjectsQueue3D.Count <= 0)             
+                {
+                    Debug.LogWarning("We need more 3D audio sources.");
+                    return null;
+                }
+
+                AudioSource audioSource = audioObjectsQueue3D.Dequeue();
+                audioSource.gameObject.SetActive(true);
 
                 // Audio Source Config
                 audioSource.clip = sound.clip;
@@ -170,9 +199,8 @@ public class AudioManager : MonoBehaviour
                 else
                 {
                     audioSource.Play();
-                    Object.Destroy(soundGameObject, audioSource.clip.length);
+                    StartCoroutine(Return3DSourceToPool(audioSource));
                     return audioSource;
-                    // TODO: To improve performace: Object Pooling
                 }
             }
             else return null;
@@ -182,6 +210,13 @@ public class AudioManager : MonoBehaviour
             Debug.LogError("Sound " + soundKey + "not found!");
             return null;
         }
+    }
+
+    IEnumerator Return3DSourceToPool(AudioSource audioSource)
+    {
+        yield return new WaitForSeconds(audioSource.clip.length);
+        audioSource.gameObject.SetActive(false);
+        audioObjectsQueue3D.Enqueue(audioSource);
     }
 
     private bool CanPlaySound(Sound sound)
