@@ -52,8 +52,9 @@ public class AudioManager : MonoBehaviour
         CyberTile1,
         CyberTileZap1,
 
-        Teleport1,
-        Teleport2,
+        SoulTileStep,
+        TeleportIn,
+        TeleportOut,
     }
 
     [System.Serializable]

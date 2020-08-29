@@ -42,9 +42,11 @@ public class SoulTile : TilePath
         player.SetIdle(true);
         player.enabled = false;
         soulTileAnimator.SetTrigger("teleportTrigger");
-        audioManager.PlaySound(AudioManager.SoundKey.Teleport1);
-        audioManager.PlaySound(AudioManager.SoundKey.Teleport2);
+        audioManager.PlaySound(AudioManager.SoundKey.SoulTileStep);
+        audioManager.PlaySound(AudioManager.SoundKey.TeleportIn);
         yield return new WaitForSeconds(1f);
+        audioManager.PlaySound(AudioManager.SoundKey.TeleportOut);
+        pairTile.soulTileAnimator.Play("Soul_Teleport_Out", 0);
 
         player.enabled = true;
         player.transform.position = pairTile.transform.position;
