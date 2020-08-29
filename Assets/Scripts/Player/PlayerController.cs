@@ -26,8 +26,9 @@ public class PlayerController : MonoBehaviour
     ParticleSystem powerParticles;
 
     public Vector2 GetMoveUnits() => new Vector2(moveUnitX, moveUnitY);
+    public void SetIdle(bool idle) => playerAnimation.SetIdle(idle);
 
-    public void SetWinState()
+    public void FacePlayerUp()
     {
         playerAnimation.SetMoveDirection(new Vector2(0, 0));
         playerAnimation.SetIdle(true);

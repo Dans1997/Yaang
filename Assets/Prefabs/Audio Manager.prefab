@@ -188,3 +188,19 @@ MonoBehaviour:
     pitch: 1
     spatialBlend: 0.8
     loop: 0
+  - audioSource: {fileID: 0}
+    soundKey: 18
+    clip: {fileID: 8300000, guid: 9eec9a8c121430c49b59b06e6dcff2d5, type: 3}
+    delay: 0
+    volume: 1
+    pitch: 1
+    spatialBlend: 0
+    loop: 0
+  - audioSource: {fileID: 0}
+    soundKey: 19
+    clip: {fileID: 8300000, guid: 5b92b9ce9e132f8428816b319086ef82, type: 3}
+    delay: 0
+    volume: 0.8
+    pitch: 1
+    spatialBlend: 0
+    loop: 0

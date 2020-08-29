@@ -188,13 +188,13 @@ public class PathManager : MonoBehaviour
         TilePath tile = System.Array.Find(path, t => t.transform.position == position);
         if (tile != null)
         {
-            if (!tile.WasVisited()) tileCountText.text = $"{++visitedTiles}/{path.Length}";
+            if (!tile.WasVisited()) IncrementVisitedCount();
             tile.OnVisit(player);
             if (new Vector2(position.x, position.y) == new Vector2(finishTilePos.x, finishTilePos.y))
             {
                 if (AreAllTilesVisited())
                 {
-                    player.SetWinState();
+                    player.FacePlayerUp();
                     GameManager.GameManagerInstance.CompleteLevel();
                 }
             }
@@ -206,7 +206,7 @@ public class PathManager : MonoBehaviour
         }
     }
 
-    public bool DoesTileExistInPosition(Vector3 position) => System.Array.Find(path, t => t.transform.position == position) != null;
+    public void IncrementVisitedCount() => tileCountText.text = $"{++visitedTiles}/{path.Length}";
 
     public bool AreAllTilesVisited()
     {

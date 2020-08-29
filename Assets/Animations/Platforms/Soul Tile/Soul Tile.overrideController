@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!221 &22100000
+AnimatorOverrideController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Soul Tile
+  m_Controller: {fileID: 9100000, guid: 1005b860a1ca6d849b4871c0db631cfa, type: 2}
+  m_Clips:
+  - m_OriginalClip: {fileID: 7400000, guid: 745d4a85aba6d7a4a82334cb76d63e25, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 1d8bd96cc79514c4faea111f69516c2a, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 966207ad70e64974d82e146da14b8896, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 7b84942f704b4274f84b8c142338b708, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: ae61e58be1d03a343a9d43128136727d, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: fe656e2fad955994095cbb38fd430d84, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 4d2ef9665e5ce684da7d753e3e8ea397, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: fd8c9284fd34c1042a0c38ee4fdcd966, type: 2}

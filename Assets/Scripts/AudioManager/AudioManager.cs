@@ -51,6 +51,9 @@ public class AudioManager : MonoBehaviour
 
         CyberTile1,
         CyberTileZap1,
+
+        Teleport1,
+        Teleport2,
     }
 
     [System.Serializable]
@@ -176,7 +179,6 @@ public class AudioManager : MonoBehaviour
             {
                 if(audioObjectsQueue3D.Count <= 0)             
                 {
-                    Debug.LogWarning("We need more 3D audio sources.");
                     return null;
                 }
 
