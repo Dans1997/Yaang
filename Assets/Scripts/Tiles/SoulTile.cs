@@ -11,6 +11,7 @@ public class SoulTile : TilePath
     [SerializeField] SoulTile pairTile;
     Animator soulTileAnimator;
     AudioManager audioManager;
+    Camera mainCamera;
 
     private void Start()
     {
@@ -20,6 +21,7 @@ public class SoulTile : TilePath
         }
         soulTileAnimator = GetComponent<Animator>();
         audioManager = AudioManager.AudioManagerInstance;
+        mainCamera = Camera.main;
     }
 
     public override string GetName() => "Soul Tile";
@@ -45,12 +47,13 @@ public class SoulTile : TilePath
         audioManager.PlaySound(AudioManager.SoundKey.SoulTileStep);
         audioManager.PlaySound(AudioManager.SoundKey.TeleportIn);
         yield return new WaitForSeconds(1f);
+
         audioManager.PlaySound(AudioManager.SoundKey.TeleportOut);
         pairTile.soulTileAnimator.Play("Soul_Teleport_Out", 0);
 
         player.enabled = true;
         player.transform.position = pairTile.transform.position;
-        Camera.main.transform.position = new Vector3(player.transform.position.x, player.transform.position.y, Camera.main.transform.position.z);
+        mainCamera.transform.position = new Vector3(player.transform.position.x, player.transform.position.y, mainCamera.transform.position.z);
 
         if (!pairTile.WasVisited())
         {
