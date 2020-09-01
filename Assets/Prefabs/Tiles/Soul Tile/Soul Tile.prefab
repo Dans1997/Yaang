@@ -87,6 +87,7 @@ GameObject:
   - component: {fileID: 2023894934879683917}
   - component: {fileID: 2588171575035153479}
   - component: {fileID: 3667034809064811462}
+  - component: {fileID: 2769301667894972404}
   m_Layer: 0
   m_Name: Soul Tile
   m_TagString: Untagged
@@ -240,3 +241,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pairTile: {fileID: 0}
+--- !u!114 &2769301667894972404
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3667034809064811456}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 845e106baa8bcb04c8136bd23641cce8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
