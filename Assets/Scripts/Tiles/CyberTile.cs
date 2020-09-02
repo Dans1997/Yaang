@@ -54,7 +54,7 @@ public class CyberTile : TilePath
 
     public override void PlayTurnOnSound()
     {
-        AudioManager.AudioManagerInstance.PlaySound(AudioManager.SoundKey.CyberTile1);
+        //AudioManager.AudioManagerInstance.PlaySound(AudioManager.SoundKey.CyberTile1);
     }
 
     private void Update()

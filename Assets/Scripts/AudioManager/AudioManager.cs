@@ -83,7 +83,7 @@ public class AudioManager : MonoBehaviour
     AudioSource oneShotAudioSource;
 
     // Pooling System
-    int queueCount = 15;
+    int queueCount = 20;
     Queue<AudioSource> audioObjectsQueue3D = new Queue<AudioSource>();
 
     private void Awake()

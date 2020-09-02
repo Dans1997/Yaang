@@ -15,7 +15,7 @@ public class SoulTile : TilePath
     SoulTile soulTile = null;
     Animator soulTileAnimator;
     AudioManager audioManager;
-    Camera mainCamera;
+    CameraFollow cameraFollow;
     PathManager pathManager;
 
     private void Start()
@@ -23,7 +23,7 @@ public class SoulTile : TilePath
         if (pairTile == null) Debug.LogWarning("Soul Tile has no pair to teleport to!");
         soulTileAnimator = GetComponent<Animator>();
         audioManager = AudioManager.AudioManagerInstance;
-        mainCamera = Camera.main;
+        cameraFollow = FindObjectOfType<CameraFollow>();
         pathManager = PathManager.PathManagerInstance;
 
         if (pairTile.GetType() == typeof(SoulTile))
@@ -65,7 +65,7 @@ public class SoulTile : TilePath
 
         player.enabled = true;
         player.transform.position = pairTile.transform.position;
-        mainCamera.transform.position = new Vector3(player.transform.position.x, player.transform.position.y, mainCamera.transform.position.z);
+        if (cameraFollow.IsCameraMovementEnabled()) cameraFollow.transform.position = player.transform.position;
 
         if (!pairTile.WasVisited())
         {

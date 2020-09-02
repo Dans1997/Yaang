@@ -48,7 +48,7 @@ public class FireTile : TilePath
             if (transform.position != player.transform.position)
             {
                 StopCoroutine(scorchCoroutine);
-                fireTileWarmUp.Stop();
+                fireTileWarmUp?.Stop();
             }
             yield return 0;
         }

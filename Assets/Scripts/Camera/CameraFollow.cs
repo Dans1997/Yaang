@@ -11,6 +11,9 @@ public class CameraFollow : MonoBehaviour
     [Header("Camera Bounds")]
     [SerializeField] float minXPos = 0f, maxXPos = 0f, minYPos = 0f, maxYPos = 0f;
 
+    // State
+    bool isCameraMovementEnabled = true;
+
     // Cached Components
     GameObject followObject = null;
     Vector2 threshold = new Vector2(0,0);
@@ -19,15 +22,20 @@ public class CameraFollow : MonoBehaviour
     void Start()
     {
         threshold = CalculateThreshold();
-        if(followObject) transform.position = followObject.transform.position;
+        if(followObject && isCameraMovementEnabled) transform.position = followObject.transform.position;
     }
 
+    public bool IsCameraMovementEnabled() => isCameraMovementEnabled;
+
+    public void EnableCameraMovement(bool enable) => isCameraMovementEnabled = enable;
+
     public void SetFollowObject(GameObject newfollowObject) => followObject = newfollowObject;
+
     public void SetMoveSpeed(float newSpeed) => moveSpeed = newSpeed;
 
     void Update()
     {
-        if (!followObject) return;
+        if (!followObject || !isCameraMovementEnabled) return;
 
         Vector2 followPos = followObject.transform.position;
         float xDiff = Vector2.Distance(Vector2.right * transform.position.x, Vector2.right * followPos.x);

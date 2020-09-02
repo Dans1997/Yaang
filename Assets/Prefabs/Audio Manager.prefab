@@ -184,7 +184,7 @@ MonoBehaviour:
     soundKey: 17
     clip: {fileID: 8300000, guid: 20af2dbb96ba0bb4a921b4c07cace8c2, type: 3}
     delay: 0
-    volume: 0.7
+    volume: 0.4
     pitch: 1
     spatialBlend: 0.8
     loop: 0

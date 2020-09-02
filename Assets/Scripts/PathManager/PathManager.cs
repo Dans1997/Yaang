@@ -30,9 +30,12 @@ public class PathManager : MonoBehaviour
 
     #endregion Singleton
 
+    [Header("Requires All Tiles to Win?")]
+    [SerializeField] bool requiresAllTiles = false;
+
+    [Space]
     [Header("Default View Camera")]
     [SerializeField] float lightTileTime = 0f;
-    [SerializeField] bool requiresAllTiles = false;
 
     [Space]
     [Header("Overall View Camera")]
@@ -40,11 +43,18 @@ public class PathManager : MonoBehaviour
     [SerializeField] float overallCameraTime = 11f;
     [SerializeField] float overallCameraTileTime = 0.25f;
 
+    [Space]
+    [Header("Static Camera")]
+    [SerializeField] bool staticView = false;
+    [SerializeField] Vector2 cameraCenter = new Vector2(0, 0);
+    [SerializeField] float staticTileTime = 0.25f;
+
     // State
     Vector3 startTilePos;
     Vector3 finishTilePos;
     Vector3 exitDoorPos;
     int visitedTiles = 1;
+    readonly float targetOrthoSize = 8f; // Covers all tiles from left to right
 
     // Cached Components
     PlayerController player;
@@ -83,6 +93,14 @@ public class PathManager : MonoBehaviour
             cameraFollow.SetFollowObject(player.gameObject);
             path[0].TurnOn(); // Light Up First Tile
             path[0].SetVisit(true);
+
+            // If Static View Is Enabled, Ensure Camera is in Given Position
+            if (staticView)
+            { 
+                cameraFollow.GetComponent<Camera>().orthographicSize = targetOrthoSize;
+                cameraFollow.transform.position = new Vector3(cameraCenter.x, cameraCenter.y, cameraFollow.transform.position.z);
+                cameraFollow.EnableCameraMovement(false);
+            }
         }
 
         // Update Tile Count Text
@@ -102,7 +120,9 @@ public class PathManager : MonoBehaviour
 
         // Camera Zoom Related Variables
         float startCameraSize = mainCamera.orthographicSize;
-        float targetCameraSize = 5f; // Covers all tiles from left to right
+
+        // Static View Variables
+        Vector3 centerPos = new Vector3(cameraCenter.x, cameraCenter.y, cameraFollow.transform.position.z);
 
         // Move Player to First Tile Path
         playerAnimation.PlayAnimation("Move_Up_Loop");
@@ -118,18 +138,51 @@ public class PathManager : MonoBehaviour
 
         yield return new WaitForSeconds(0.7f); // 70% of Tile Light Up Animation Duration
 
-
-        if(overallView)
+        if (staticView)
         {
-            // Zoom Camera Out          
-            while (mainCamera.orthographicSize < targetCameraSize)
+            // Move Camera to The Given Center and Zoom Camera Out 
+            StartCoroutine(cameraFollow.LerpFromTo(cameraFollow.transform.position, centerPos, 2f));
+            while (mainCamera.orthographicSize < targetOrthoSize)
             {
-                mainCamera.orthographicSize = Mathf.MoveTowards(mainCamera.orthographicSize, targetCameraSize, Time.deltaTime);
+                mainCamera.orthographicSize = Mathf.MoveTowards(mainCamera.orthographicSize, targetOrthoSize, Time.deltaTime * 3);
                 yield return 0;
             }
-            mainCamera.orthographicSize = targetCameraSize;
+            yield return new WaitUntil(() => new Vector2(cameraFollow.transform.position.x, cameraFollow.transform.position.y) 
+            == new Vector2(centerPos.x, centerPos.y));
+            mainCamera.orthographicSize = targetOrthoSize;
 
-            // Move Camera to The Exit Door
+            // Light Up All Tiles
+            foreach (TilePath tile in path)
+            {
+                tile.TurnOn();
+                tile.PlayTurnOnSound();
+                yield return new WaitForSeconds(staticTileTime);
+            }
+            yield return new WaitForSeconds(3f);
+
+            // Turn Off All Tiles
+            gameObject.BroadcastMessage("ResetTile");
+            audioManager.PlaySound(AudioManager.SoundKey.TileLightDown1);
+            yield return new WaitForSeconds(1.3f);
+
+            // Enable Player Control - But Don't Set Camera Follow
+            player.enabled = true;
+            playerHUD.enabled = true;
+            cameraFollow.EnableCameraMovement(false);
+            yield break;
+        }
+
+        if (overallView && !staticView)
+        {
+            // Zoom Camera Out          
+            while (mainCamera.orthographicSize < targetOrthoSize)
+            {
+                mainCamera.orthographicSize = Mathf.MoveTowards(mainCamera.orthographicSize, targetOrthoSize, Time.deltaTime);
+                yield return 0;
+            }
+            mainCamera.orthographicSize = targetOrthoSize;
+
+            // Move Camera to The Exit Door While Lighting Up Tiles
             StartCoroutine(cameraFollow.LerpFromTo(cameraFollow.transform.position, exitDoorPos, overallCameraTime));
             foreach (TilePath tile in path)
             {        
@@ -137,15 +190,18 @@ public class PathManager : MonoBehaviour
                 tile.PlayTurnOnSound();
                 yield return new WaitForSeconds(overallCameraTileTime);
             }
-            yield return new WaitUntil(() => new Vector2(cameraFollow.transform.position.x, cameraFollow.transform.position.y) == new Vector2(exitDoorPos.x, exitDoorPos.y));
+            yield return new WaitUntil(() => new Vector2(cameraFollow.transform.position.x, cameraFollow.transform.position.y)
+            == new Vector2(exitDoorPos.x, exitDoorPos.y));
         }
-        else
+        
+        if(!overallView && !staticView)
         {
             // Light Up All Tile Paths
             foreach (TilePath tile in path)
             {
                 StartCoroutine(cameraFollow.LerpFromTo(cameraFollow.transform.position, tile.transform.position, lightTileTime));
-                yield return new WaitUntil(() => new Vector2(cameraFollow.transform.position.x, cameraFollow.transform.position.y) == new Vector2(tile.transform.position.x, tile.transform.position.y));
+                yield return new WaitUntil(() => new Vector2(cameraFollow.transform.position.x, cameraFollow.transform.position.y) 
+                == new Vector2(tile.transform.position.x, tile.transform.position.y));
                 tile.TurnOn();
                 tile.PlayTurnOnSound();
                 yield return new WaitForSeconds(0.7f); // 70% of Tile Light Up Animation Duration
@@ -168,13 +224,15 @@ public class PathManager : MonoBehaviour
         }
         mainCamera.orthographicSize = startCameraSize;
 
-        yield return new WaitUntil(() => new Vector2(cameraFollow.transform.position.x, cameraFollow.transform.position.y) == new Vector2(exitDoorPos.x, exitDoorPos.y));
+        yield return new WaitUntil(() => new Vector2(cameraFollow.transform.position.x, cameraFollow.transform.position.y)
+        == new Vector2(exitDoorPos.x, exitDoorPos.y));
         yield return new WaitForSeconds(2f); // Time to show Exit Door
 
-        // Go to Player Position
+        // Setup Camera to Go to Player Position
         cameraFollow.SetMoveSpeed(12f);
         cameraFollow.SetFollowObject(player.gameObject);
-        yield return new WaitUntil(() => new Vector2(cameraFollow.transform.position.x, cameraFollow.transform.position.y) == new Vector2(player.transform.position.x, player.transform.position.y));
+        yield return new WaitUntil(() => new Vector2(cameraFollow.transform.position.x, cameraFollow.transform.position.y)
+        == new Vector2(player.transform.position.x, player.transform.position.y));
 
         // Enable Player Control
         cameraFollow.SetMoveSpeed(3f);
