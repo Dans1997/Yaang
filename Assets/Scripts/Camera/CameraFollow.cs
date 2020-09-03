@@ -31,6 +31,8 @@ public class CameraFollow : MonoBehaviour
 
     public void SetFollowObject(GameObject newfollowObject) => followObject = newfollowObject;
 
+    public float GetMoveSpeed() => moveSpeed;
+
     public void SetMoveSpeed(float newSpeed) => moveSpeed = newSpeed;
 
     void Update()

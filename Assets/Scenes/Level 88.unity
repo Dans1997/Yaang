@@ -542,11 +542,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b0123b0e4c989647a3ab126c32cfff9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lightTileTime: 1
   requiresAllTiles: 1
+  lightTileTime: 0.5
   overallView: 0
   overallCameraTime: 5
   overallCameraTileTime: 0.5
+  staticView: 0
+  cameraCenter: {x: 0, y: 0}
+  staticTileTime: 0.25
 --- !u!1001 &1146707012
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -957,6 +960,11 @@ PrefabInstance:
       propertyPath: pairTile
       value: 
       objectReference: {fileID: 1146707013}
+    - target: {fileID: 3667034809064811462, guid: aeb8d619386764c48aec3d8ede435de0,
+        type: 3}
+      propertyPath: canBounce
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: aeb8d619386764c48aec3d8ede435de0, type: 3}
 --- !u!4 &1744529387 stripped

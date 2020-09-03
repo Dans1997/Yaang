@@ -26,13 +26,29 @@ public class PlayerController : MonoBehaviour
     ParticleSystem powerParticles;
 
     public Vector2 GetMoveUnits() => new Vector2(moveUnitX, moveUnitY);
+
     public void SetIdle(bool idle) => playerAnimation.SetIdle(idle);
 
     public void FacePlayerUp()
     {
         playerAnimation.SetMoveDirection(new Vector2(0, 0));
         playerAnimation.SetIdle(true);
+        playerAnimation.PlayAnimation("Idle");
         this.enabled = false;
+    }
+
+    public IEnumerator TeleportPlayerTo(Vector3 destination, float duration)
+    {
+        Vector3 origin = transform.position;
+        playerAnimation.PlayAnimation("Death");
+
+        for (float t = 0f; t < duration; t += Time.deltaTime)
+        {
+            transform.position = Vector3.Lerp(origin, destination, t / duration);
+            yield return 0;
+        }
+        transform.position = destination;
+        FacePlayerUp();
     }
 
     // Start is called before the first frame update
@@ -189,11 +205,6 @@ public class PlayerController : MonoBehaviour
         playerAnimation.SetDeath();
         this.enabled = false;
         yield return new WaitForSeconds(1f);
-
-        //StartCoroutine(cameraShake.ShakeCamera(.25f, 1f));
-        //audioManager.PlaySound(AudioManager.SoundKey.PlayerGroundHit);
-       // yield return new WaitForSeconds(0.5f);
-
         GameManager.GameManagerInstance.FailLevel();
     }
 }

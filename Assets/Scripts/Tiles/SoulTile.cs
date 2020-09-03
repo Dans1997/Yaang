@@ -13,7 +13,6 @@ public class SoulTile : TilePath
     // Cached Components
     [SerializeField] TilePath pairTile = null;
     SoulTile soulTile = null;
-    Animator soulTileAnimator;
     AudioManager audioManager;
     CameraFollow cameraFollow;
     PathManager pathManager;
@@ -21,7 +20,6 @@ public class SoulTile : TilePath
     private void Start()
     {
         if (pairTile == null) Debug.LogWarning("Soul Tile has no pair to teleport to!");
-        soulTileAnimator = GetComponent<Animator>();
         audioManager = AudioManager.AudioManagerInstance;
         cameraFollow = FindObjectOfType<CameraFollow>();
         pathManager = PathManager.PathManagerInstance;
@@ -51,21 +49,18 @@ public class SoulTile : TilePath
     {
         player.SetIdle(true);
         player.enabled = false;
-        soulTileAnimator.SetTrigger("teleportTrigger");
+        float previousMoveSpeed = cameraFollow.GetMoveSpeed();
+        cameraFollow.SetMoveSpeed(12f);
+
         audioManager.PlaySound(AudioManager.SoundKey.SoulTileStep);
         audioManager.PlaySound(AudioManager.SoundKey.TeleportIn);
-        yield return new WaitForSeconds(1f);
+        StartCoroutine(player.TeleportPlayerTo(pairTile.transform.position, 1f));
 
-        audioManager.PlaySound(AudioManager.SoundKey.TeleportOut);
-        
-        if(soulTile)
-        {
-            soulTile.soulTileAnimator.Play("Soul_Teleport_Out", 0);
-        }
+        yield return new WaitUntil(() => player.transform.position == pairTile.transform.position);
 
+        player.FacePlayerUp();
         player.enabled = true;
-        player.transform.position = pairTile.transform.position;
-        if (cameraFollow.IsCameraMovementEnabled()) cameraFollow.transform.position = player.transform.position;
+        cameraFollow.SetMoveSpeed(previousMoveSpeed);
 
         if (!pairTile.WasVisited())
         {
@@ -74,7 +69,6 @@ public class SoulTile : TilePath
                 if (soulTile.canBounce)
                 {
                     player.enabled = false;
-                    yield return new WaitForSeconds(1f);
                     pathManager.CheckPlayerPosition();
                 } 
                 else
