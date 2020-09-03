@@ -54,7 +54,7 @@ public class PathManager : MonoBehaviour
     Vector3 finishTilePos;
     Vector3 exitDoorPos;
     int visitedTiles = 1;
-    readonly float targetOrthoSize = 8f; // Covers all tiles from left to right
+    readonly float targetOrthoSize = 10f; // Covers all tiles from left to right
 
     // Cached Components
     PlayerController player;
