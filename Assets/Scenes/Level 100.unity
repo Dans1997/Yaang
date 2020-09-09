@@ -346,21 +346,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: CameraHolder
       objectReference: {fileID: 0}
-    - target: {fileID: 4400891073033364761, guid: 78bd64f5d3f223c4ab0963f31eaa07fd,
-        type: 3}
-      propertyPath: minXPos
-      value: -8.25
-      objectReference: {fileID: 0}
-    - target: {fileID: 4400891073033364761, guid: 78bd64f5d3f223c4ab0963f31eaa07fd,
-        type: 3}
-      propertyPath: maxXPos
-      value: 8.25
-      objectReference: {fileID: 0}
-    - target: {fileID: 4400891073033364761, guid: 78bd64f5d3f223c4ab0963f31eaa07fd,
-        type: 3}
-      propertyPath: maxYPos
-      value: 15.25
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 78bd64f5d3f223c4ab0963f31eaa07fd, type: 3}
 --- !u!1001 &61788690
@@ -5403,11 +5388,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b0123b0e4c989647a3ab126c32cfff9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lightTileTime: 0.25
   requiresAllTiles: 1
+  lightTileTime: 0.25
   overallView: 1
   overallCameraTime: 25
   overallCameraTileTime: 0.1
+  staticView: 0
+  cameraCenter: {x: 0, y: 0}
+  staticTileTime: 0.25
 --- !u!1001 &1157812468
 PrefabInstance:
   m_ObjectHideFlags: 0
