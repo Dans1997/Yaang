@@ -50,7 +50,7 @@ MonoBehaviour:
   m_Intensity: 1
   m_LightVolumeOpacity: 0
   m_ApplyToSortingLayers: 092b8e44
-  m_LightCookieSprite: {fileID: 6152532013045154667, guid: a5333396092649241b052998fc2a4da1,
+  m_LightCookieSprite: {fileID: 7356740644466216324, guid: 7da27b3443b35184a9d7e1548655c463,
     type: 3}
   m_UseNormalMap: 1
   m_LightOrder: 0
@@ -150,8 +150,7 @@ SpriteRenderer:
   m_SortingLayerID: 1150167817
   m_SortingLayer: 2
   m_SortingOrder: 0
-  m_Sprite: {fileID: 6152532013045154667, guid: a5333396092649241b052998fc2a4da1,
-    type: 3}
+  m_Sprite: {fileID: 620932804081355213, guid: 7c489fff4f877c0449287a91b56ed310, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -240,7 +239,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ce8a2ae7adc5b246be3fb87af67300e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  canBounce: 1
+  canBounce: 0
   pairTile: {fileID: 0}
 --- !u!114 &2769301667894972404
 MonoBehaviour:

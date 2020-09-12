@@ -549,11 +549,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b0123b0e4c989647a3ab126c32cfff9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lightTileTime: 0.5
   requiresAllTiles: 0
+  lightTileTime: 0.5
   overallView: 0
   overallCameraTime: 11
   overallCameraTileTime: 0.25
+  staticView: 0
+  cameraCenter: {x: 0, y: 0}
+  staticTileTime: 0.25
 --- !u!1001 &1468955712
 PrefabInstance:
   m_ObjectHideFlags: 0

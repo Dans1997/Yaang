@@ -10,7 +10,7 @@ Material:
   m_Name: SuperNova
   m_Shader: {fileID: -6465566751694194690, guid: bdd9cf0cf5d38e548afbb734f45b1f52,
     type: 3}
-  m_ShaderKeywords: _EMISSION
+  m_ShaderKeywords: ETC1_EXTERNAL_ALPHA _EMISSION
   m_LightmapFlags: 2
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0

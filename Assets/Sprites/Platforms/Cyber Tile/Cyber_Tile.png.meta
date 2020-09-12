@@ -1,19 +1,22 @@
 fileFormatVersion: 2
-guid: a5333396092649241b052998fc2a4da1
+guid: eea6ce1cc75b59547abcaf0119fb1360
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 1325028264418417928
-    second: Platform1_0
+      213: 7844419703016210045
+    second: Cyber_Tile_0
   - first:
-      213: -4773310055213535079
-    second: Platform1_1
+      213: -3727090963658502940
+    second: Cyber_Tile_1
   - first:
-      213: 8289671871381138257
-    second: Platform1_2
+      213: -5384323846911474944
+    second: Cyber_Tile_2
   - first:
-      213: 6152532013045154667
-    second: Platform1_3
+      213: -424938981810035249
+    second: Cyber_Tile_3
+  - first:
+      213: 6272006725566176965
+    second: Cyber_Tile_4
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -58,7 +61,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 13
+  spritePixelsToUnits: 32
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -125,85 +128,106 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Platform1_0
+      name: Cyber_Tile_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 13
-        height: 13
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 80d130aaf22736210800000000000000
-      internalID: 1325028264418417928
+      spriteID: d7e3b5b882afcdc60800000000000000
+      internalID: 7844419703016210045
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Platform1_1
+      name: Cyber_Tile_1
       rect:
         serializedVersion: 2
-        x: 13
+        x: 32
         y: 0
-        width: 13
-        height: 13
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 990723c7bcbc1cdb0800000000000000
-      internalID: -4773310055213535079
+      spriteID: 4ec0199f386b64cc0800000000000000
+      internalID: -3727090963658502940
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Platform1_2
+      name: Cyber_Tile_2
       rect:
         serializedVersion: 2
-        x: 26
+        x: 64
         y: 0
-        width: 13
-        height: 13
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 15b683e75a4da0370800000000000000
-      internalID: 8289671871381138257
+      spriteID: 0034d251df90745b0800000000000000
+      internalID: -5384323846911474944
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Platform1_3
+      name: Cyber_Tile_3
       rect:
         serializedVersion: 2
-        x: 39
+        x: 96
         y: 0
-        width: 13
-        height: 13
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b6386c2b44f226550800000000000000
-      internalID: 6152532013045154667
+      spriteID: fc52ff95f305a1af0800000000000000
+      internalID: -424938981810035249
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cyber_Tile_4
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5ce9b3ae2e4aa0750800000000000000
+      internalID: 6272006725566176965
       vertices: []
       indices: 
       edges: []
@@ -217,7 +241,9 @@ TextureImporter:
     indices: 
     edges: []
     weights: []
-    secondaryTextures: []
+    secondaryTextures:
+    - texture: {fileID: 2800000, guid: ec063fe4897bedf40811e3a7df820468, type: 3}
+      name: _EmissionMap
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

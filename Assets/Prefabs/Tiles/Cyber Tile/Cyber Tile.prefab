@@ -47,10 +47,10 @@ MonoBehaviour:
   m_BlendStyleIndex: 0
   m_FalloffIntensity: 0.5
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 0
+  m_Intensity: 1
   m_LightVolumeOpacity: 0
   m_ApplyToSortingLayers: 092b8e44
-  m_LightCookieSprite: {fileID: 1325028264418417928, guid: a5333396092649241b052998fc2a4da1,
+  m_LightCookieSprite: {fileID: 6272006725566176965, guid: eea6ce1cc75b59547abcaf0119fb1360,
     type: 3}
   m_UseNormalMap: 1
   m_LightOrder: 0
@@ -152,7 +152,7 @@ SpriteRenderer:
   m_SortingLayerID: 1150167817
   m_SortingLayer: 2
   m_SortingOrder: 0
-  m_Sprite: {fileID: 1325028264418417928, guid: a5333396092649241b052998fc2a4da1,
+  m_Sprite: {fileID: 6272006725566176965, guid: eea6ce1cc75b59547abcaf0119fb1360,
     type: 3}
   m_Color: {r: 0.22258809, g: 0.6017741, b: 0.7735849, a: 1}
   m_FlipX: 0

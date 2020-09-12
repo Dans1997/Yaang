@@ -495,6 +495,11 @@ PrefabInstance:
       propertyPath: pairTile
       value: 
       objectReference: {fileID: 1360990870}
+    - target: {fileID: 3667034809064811462, guid: aeb8d619386764c48aec3d8ede435de0,
+        type: 3}
+      propertyPath: canBounce
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: aeb8d619386764c48aec3d8ede435de0, type: 3}
 --- !u!114 &98715967 stripped
@@ -522,21 +527,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1122013040}
     m_Modifications:
-    - target: {fileID: 6221005580904282248, guid: 9a7e41a71d9192946abab8f2561f434e,
-        type: 3}
-      propertyPath: m_Color.r
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6221005580904282248, guid: 9a7e41a71d9192946abab8f2561f434e,
-        type: 3}
-      propertyPath: m_Color.g
-      value: 0.7211728
-      objectReference: {fileID: 0}
-    - target: {fileID: 6221005580904282248, guid: 9a7e41a71d9192946abab8f2561f434e,
-        type: 3}
-      propertyPath: m_Color.b
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 6221005580904282249, guid: 9a7e41a71d9192946abab8f2561f434e,
         type: 3}
       propertyPath: m_Name
@@ -3211,6 +3201,11 @@ PrefabInstance:
       propertyPath: pairTile
       value: 
       objectReference: {fileID: 98715967}
+    - target: {fileID: 3667034809064811462, guid: aeb8d619386764c48aec3d8ede435de0,
+        type: 3}
+      propertyPath: canBounce
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: aeb8d619386764c48aec3d8ede435de0, type: 3}
 --- !u!4 &940253577 stripped
@@ -3453,11 +3448,6 @@ PrefabInstance:
       propertyPath: pairTile
       value: 
       objectReference: {fileID: 940253578}
-    - target: {fileID: 3667034809064811462, guid: aeb8d619386764c48aec3d8ede435de0,
-        type: 3}
-      propertyPath: canBounce
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: aeb8d619386764c48aec3d8ede435de0, type: 3}
 --- !u!4 &989900601 stripped
@@ -4807,6 +4797,11 @@ PrefabInstance:
       propertyPath: pairTile
       value: 
       objectReference: {fileID: 1532936759}
+    - target: {fileID: 3667034809064811462, guid: aeb8d619386764c48aec3d8ede435de0,
+        type: 3}
+      propertyPath: canBounce
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: aeb8d619386764c48aec3d8ede435de0, type: 3}
 --- !u!114 &1360990870 stripped
@@ -5424,6 +5419,11 @@ PrefabInstance:
       propertyPath: pairTile
       value: 
       objectReference: {fileID: 989900602}
+    - target: {fileID: 3667034809064811462, guid: aeb8d619386764c48aec3d8ede435de0,
+        type: 3}
+      propertyPath: canBounce
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: aeb8d619386764c48aec3d8ede435de0, type: 3}
 --- !u!4 &1532936758 stripped

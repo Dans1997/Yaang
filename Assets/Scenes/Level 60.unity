@@ -331,106 +331,65 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1122013040}
     m_Modifications:
+    - target: {fileID: 1390683313721831472, guid: afc07fa0d157c8448ac85f73e8345250,
+        type: 3}
+      propertyPath: m_Name
+      value: Fire Tile
+      objectReference: {fileID: 0}
+    - target: {fileID: 1390683313721831474, guid: afc07fa0d157c8448ac85f73e8345250,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1390683313721831474, guid: afc07fa0d157c8448ac85f73e8345250,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -4.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 1390683313721831474, guid: afc07fa0d157c8448ac85f73e8345250,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1390683313721831474, guid: afc07fa0d157c8448ac85f73e8345250,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1390683313721831474, guid: afc07fa0d157c8448ac85f73e8345250,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1390683313721831474, guid: afc07fa0d157c8448ac85f73e8345250,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1390683313721831474, guid: afc07fa0d157c8448ac85f73e8345250,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1390683313721831474, guid: afc07fa0d157c8448ac85f73e8345250,
         type: 3}
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 4586018615326615854, guid: afc07fa0d157c8448ac85f73e8345250,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7112440987210327100, guid: afc07fa0d157c8448ac85f73e8345250,
-        type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 6152532013045154667, guid: a5333396092649241b052998fc2a4da1,
-        type: 3}
-    - target: {fileID: 7112440987210327100, guid: afc07fa0d157c8448ac85f73e8345250,
-        type: 3}
-      propertyPath: m_Color.r
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7112440987210327100, guid: afc07fa0d157c8448ac85f73e8345250,
-        type: 3}
-      propertyPath: m_Color.g
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7112440987210327100, guid: afc07fa0d157c8448ac85f73e8345250,
-        type: 3}
-      propertyPath: m_Color.b
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7112440987210327101, guid: afc07fa0d157c8448ac85f73e8345250,
-        type: 3}
-      propertyPath: m_Name
-      value: Fire Tile - -3.75,0.75
-      objectReference: {fileID: 0}
-    - target: {fileID: 7112440987210327101, guid: afc07fa0d157c8448ac85f73e8345250,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7112440987210327103, guid: afc07fa0d157c8448ac85f73e8345250,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -3.75
-      objectReference: {fileID: 0}
-    - target: {fileID: 7112440987210327103, guid: afc07fa0d157c8448ac85f73e8345250,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.75
-      objectReference: {fileID: 0}
-    - target: {fileID: 7112440987210327103, guid: afc07fa0d157c8448ac85f73e8345250,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7112440987210327103, guid: afc07fa0d157c8448ac85f73e8345250,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7112440987210327103, guid: afc07fa0d157c8448ac85f73e8345250,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7112440987210327103, guid: afc07fa0d157c8448ac85f73e8345250,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7112440987210327103, guid: afc07fa0d157c8448ac85f73e8345250,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7112440987210327103, guid: afc07fa0d157c8448ac85f73e8345250,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 13
-      objectReference: {fileID: 0}
-    - target: {fileID: 7112440987210327103, guid: afc07fa0d157c8448ac85f73e8345250,
+    - target: {fileID: 1390683313721831474, guid: afc07fa0d157c8448ac85f73e8345250,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7112440987210327103, guid: afc07fa0d157c8448ac85f73e8345250,
+    - target: {fileID: 1390683313721831474, guid: afc07fa0d157c8448ac85f73e8345250,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7112440987210327103, guid: afc07fa0d157c8448ac85f73e8345250,
+    - target: {fileID: 1390683313721831474, guid: afc07fa0d157c8448ac85f73e8345250,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7112440989202802577, guid: afc07fa0d157c8448ac85f73e8345250,
-        type: 3}
-      propertyPath: m_Intensity
-      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: afc07fa0d157c8448ac85f73e8345250, type: 3}
@@ -2871,11 +2830,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b0123b0e4c989647a3ab126c32cfff9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lightTileTime: 0.05
   requiresAllTiles: 1
+  lightTileTime: 0.05
   overallView: 1
   overallCameraTime: 12
   overallCameraTileTime: 0.25
+  staticView: 0
+  cameraCenter: {x: 0, y: 0}
+  staticTileTime: 0.25
 --- !u!1001 &1258995724
 PrefabInstance:
   m_ObjectHideFlags: 0
